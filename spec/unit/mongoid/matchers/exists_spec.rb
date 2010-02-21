@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Matchers::Exists do
+describe Humanoid::Matchers::Exists do
 
   describe "#matches?" do
 
@@ -8,7 +8,7 @@ describe Mongoid::Matchers::Exists do
 
       context "when the value exists" do
 
-        let(:matcher) { Mongoid::Matchers::Exists.new("Test") }
+        let(:matcher) { Humanoid::Matchers::Exists.new("Test") }
 
         it "returns true" do
           matcher.matches?("$exists" => true).should be_true
@@ -18,7 +18,7 @@ describe Mongoid::Matchers::Exists do
 
       context "when the value does not exist" do
 
-        let(:matcher) { Mongoid::Matchers::Exists.new(nil) }
+        let(:matcher) { Humanoid::Matchers::Exists.new(nil) }
 
         it "returns false" do
           matcher.matches?("$exists" => true).should be_false
@@ -32,7 +32,7 @@ describe Mongoid::Matchers::Exists do
 
       context "when the value exists" do
 
-        let(:matcher) { Mongoid::Matchers::Exists.new("Test") }
+        let(:matcher) { Humanoid::Matchers::Exists.new("Test") }
 
         it "returns false" do
           matcher.matches?("$exists" => false).should be_false
@@ -42,7 +42,7 @@ describe Mongoid::Matchers::Exists do
 
       context "when the value does not exist" do
 
-        let(:matcher) { Mongoid::Matchers::Exists.new(nil) }
+        let(:matcher) { Humanoid::Matchers::Exists.new(nil) }
 
         it "returns true" do
           matcher.matches?("$exists" => false).should be_true

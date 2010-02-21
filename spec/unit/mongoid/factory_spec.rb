@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Factory do
+describe Humanoid::Factory do
 
   describe ".build" do
 
@@ -11,7 +11,7 @@ describe Mongoid::Factory do
       end
 
       it "instantiates based on the type" do
-        person = Mongoid::Factory.build(Person, @attributes)
+        person = Humanoid::Factory.build(Person, @attributes)
         person.title.should == "Sir"
       end
     end
@@ -23,7 +23,7 @@ describe Mongoid::Factory do
       end
 
       it "instantiates based on the type" do
-        person = Mongoid::Factory.build(Person, @attributes)
+        person = Humanoid::Factory.build(Person, @attributes)
         person.title.should == "Sir"
       end
     end

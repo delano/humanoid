@@ -1,4 +1,4 @@
 class MixedDrink
-  include Mongoid::Document
+  include Humanoid::Document
   field :name
 end

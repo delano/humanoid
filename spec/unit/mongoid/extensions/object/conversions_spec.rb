@@ -1,11 +1,11 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::Object::Conversions do
+describe Humanoid::Extensions::Object::Conversions do
 
-  describe "#mongoidize" do
+  describe "#humanoidize" do
 
     it "returns its attributes" do
-      Person.new(:_id => 1, :title => "Sir").mongoidize.should ==
+      Person.new(:_id => 1, :title => "Sir").humanoidize.should ==
         { "_id" => 1, "title" => "Sir", "age" => 100, "_type" => "Person", "blood_alcohol_content" => 0.0, "pets" => false}
     end
 

@@ -1,9 +1,9 @@
 require "spec_helper"
 
-describe Mongoid::Cursor do
+describe Humanoid::Cursor do
 
   let(:collection) do
-    stub.quacks_like(Mongoid::Collection.allocate)
+    stub.quacks_like(Humanoid::Collection.allocate)
   end
 
   let(:proxy) do
@@ -11,10 +11,10 @@ describe Mongoid::Cursor do
   end
 
   let(:cursor) do
-    Mongoid::Cursor.new(Person, collection, proxy)
+    Humanoid::Cursor.new(Person, collection, proxy)
   end
 
-  (Mongoid::Cursor::OPERATIONS - [ :timeout ]).each do |name|
+  (Humanoid::Cursor::OPERATIONS - [ :timeout ]).each do |name|
 
     describe "##{name}" do
 
@@ -30,7 +30,7 @@ describe Mongoid::Cursor do
 
   describe "#collection" do
 
-    it "returns the mongoid collection" do
+    it "returns the humanoid collection" do
       cursor.collection.should == collection
     end
   end

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::String::Conversions do
+describe Humanoid::Extensions::String::Conversions do
 
   describe "#set" do
     it "returns the object to_s" do

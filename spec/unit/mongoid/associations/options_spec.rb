@@ -1,12 +1,12 @@
 require "spec_helper"
 
-describe Mongoid::Associations::Options do
+describe Humanoid::Associations::Options do
 
   describe "#name" do
 
     before do
       @attributes = { :name => :addresses }
-      @options = Mongoid::Associations::Options.new(@attributes)
+      @options = Humanoid::Associations::Options.new(@attributes)
     end
 
     it "returns the association name" do
@@ -21,7 +21,7 @@ describe Mongoid::Associations::Options do
 
       before do
         @attributes = { :extend => lambda { "Test" } }
-        @options = Mongoid::Associations::Options.new(@attributes)
+        @options = Humanoid::Associations::Options.new(@attributes)
       end
 
       it "returns the proc" do
@@ -33,7 +33,7 @@ describe Mongoid::Associations::Options do
     context "when extension doesnt exist" do
 
       before do
-        @options = Mongoid::Associations::Options.new({})
+        @options = Humanoid::Associations::Options.new({})
       end
 
       it "returns nil" do
@@ -50,7 +50,7 @@ describe Mongoid::Associations::Options do
 
       before do
         @attributes = { :extend => lambda { "Test" } }
-        @options = Mongoid::Associations::Options.new(@attributes)
+        @options = Humanoid::Associations::Options.new(@attributes)
       end
 
       it "returns true" do
@@ -62,7 +62,7 @@ describe Mongoid::Associations::Options do
     context "when extension doesnt exist" do
 
       before do
-        @options = Mongoid::Associations::Options.new({})
+        @options = Humanoid::Associations::Options.new({})
       end
 
       it "returns false" do
@@ -77,7 +77,7 @@ describe Mongoid::Associations::Options do
 
     before do
       @attributes = { :name => :game }
-      @options = Mongoid::Associations::Options.new(@attributes)
+      @options = Humanoid::Associations::Options.new(@attributes)
     end
 
     it "returns the association foreign_key" do
@@ -90,7 +90,7 @@ describe Mongoid::Associations::Options do
 
     before do
       @attributes = { :inverse_of => :addresses }
-      @options = Mongoid::Associations::Options.new(@attributes)
+      @options = Humanoid::Associations::Options.new(@attributes)
     end
 
     it "returns the inverse_of value" do
@@ -105,7 +105,7 @@ describe Mongoid::Associations::Options do
 
       before do
         @attributes = { :class_name => "Person" }
-        @options = Mongoid::Associations::Options.new(@attributes)
+        @options = Humanoid::Associations::Options.new(@attributes)
       end
 
       it "constantizes the class name" do
@@ -120,7 +120,7 @@ describe Mongoid::Associations::Options do
 
         before do
           @attributes = { :name => :person }
-          @options = Mongoid::Associations::Options.new(@attributes)
+          @options = Humanoid::Associations::Options.new(@attributes)
         end
 
         it "classifies and constantizes the association name" do
@@ -133,7 +133,7 @@ describe Mongoid::Associations::Options do
 
         before do
           @attributes = { :name => :people }
-          @options = Mongoid::Associations::Options.new(@attributes)
+          @options = Humanoid::Associations::Options.new(@attributes)
         end
 
         it "classifies and constantizes the association name" do
@@ -150,7 +150,7 @@ describe Mongoid::Associations::Options do
 
     before do
       @attributes = { :parent_key => :person_id }
-      @options = Mongoid::Associations::Options.new(@attributes)
+      @options = Humanoid::Associations::Options.new(@attributes)
     end
 
     it "returns the parent's foreign key value" do
@@ -165,7 +165,7 @@ describe Mongoid::Associations::Options do
 
       before do
         @attributes = { :polymorphic => true }
-        @options = Mongoid::Associations::Options.new(@attributes)
+        @options = Humanoid::Associations::Options.new(@attributes)
       end
 
       it "returns the attribute" do
@@ -177,7 +177,7 @@ describe Mongoid::Associations::Options do
     context "when attribute not provided" do
 
       before do
-        @options = Mongoid::Associations::Options.new
+        @options = Humanoid::Associations::Options.new
       end
 
       it "returns false" do

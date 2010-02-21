@@ -1,4 +1,4 @@
 class Patient
-  include Mongoid::Document
+  include Humanoid::Document
   store_in :inpatient
 end

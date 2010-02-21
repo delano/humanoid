@@ -1,12 +1,12 @@
 require "spec_helper"
 
-describe Mongoid::Config do
+describe Humanoid::Config do
 
   after :all do
     config.raise_not_found_error = true
   end
 
-  let(:config) { Mongoid::Config.instance }
+  let(:config) { Humanoid::Config.instance }
 
   describe "#database=" do
 

@@ -1,18 +1,18 @@
 require "rubygems"
 require "ruby-prof"
 require "benchmark"
-require "mongoid"
+require "humanoid"
 
-Mongoid.configure do |config|
+Humanoid.configure do |config|
   config.persist_in_safe_mode = false
-  config.master = Mongo::Connection.new.db("mongoid_perf_test")
+  config.master = Mongo::Connection.new.db("humanoid_perf_test")
 end
 
-Mongoid.master.collection("people").drop
+Humanoid.master.collection("people").drop
 
 class Person
-  include Mongoid::Document
-  include Mongoid::Timestamps
+  include Humanoid::Document
+  include Humanoid::Timestamps
   field :birth_date, :type => Date
   has_one :name
   has_one :address
@@ -20,7 +20,7 @@ class Person
 end
 
 class Name
-  include Mongoid::Document
+  include Humanoid::Document
   field :given
   field :family
   field :middle
@@ -28,7 +28,7 @@ class Name
 end
 
 class Address
-  include Mongoid::Document
+  include Humanoid::Document
   field :street
   field :city
   field :state
@@ -38,7 +38,7 @@ class Address
 end
 
 class Phone
-  include Mongoid::Document
+  include Humanoid::Document
   field :country_code, :type => Integer
   field :number
   field :phone_type
@@ -50,7 +50,7 @@ end
 puts "Starting benchmark..."
 
 Benchmark.bm do |bm|
-  bm.report("Mongoid") do
+  bm.report("Humanoid") do
     10000.times do |n|
       person = Person.new(:birth_date => Date.new(1970, 1, 1))
       name = Name.new(:given => "James", :family => "Kirk", :middle => "Tiberius")
@@ -74,4 +74,4 @@ end
 # printer = RubyProf::FlatPrinter.new(result)
 # printer.print(STDOUT, 0)
 
-# Mongoid.database.collection("people").drop
+# Humanoid.database.collection("people").drop

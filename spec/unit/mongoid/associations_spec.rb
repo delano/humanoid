@@ -1,11 +1,11 @@
 require "spec_helper"
 
-describe Mongoid::Associations do
+describe Humanoid::Associations do
 
   before do
     @collection = stub(:name => "people")
     @database = stub(:collection => @collection)
-    Mongoid.stubs(:database).returns(@database)
+    Humanoid.stubs(:database).returns(@database)
   end
 
   after do
@@ -222,7 +222,7 @@ describe Mongoid::Associations do
     context "when type is passed in" do
 
       before do
-        Mongoid::Commands::Save.expects(:execute)
+        Humanoid::Commands::Save.expects(:execute)
         @writer = @canvas.create_writer(:speed => 250, :_type => "HtmlWriter")
       end
 
@@ -243,7 +243,7 @@ describe Mongoid::Associations do
     context "when type is not passed in" do
 
       before do
-        Mongoid::Commands::Save.expects(:execute)
+        Humanoid::Commands::Save.expects(:execute)
         @writer = @canvas.create_writer(:speed => 250, :_type => "HtmlWriter")
       end
 

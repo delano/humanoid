@@ -6,8 +6,8 @@ require "spec/rake/spectask"
 begin
   require "jeweler"
   Jeweler::Tasks.new do |gem|
-    gem.name = "mongoid"
-    gem.summary = "ODM framework for MongoDB"
+    gem.name = "humanoid"
+    gem.summary = "A mirror of Mongoid (an awesome Ruby ODM framework for MongoDB) with a name I can say out loud."
     gem.email = "durran@gmail.com"
     gem.homepage = "http://mongoid.org"
     gem.authors = ["Durran Jordan"]
@@ -45,7 +45,7 @@ Rake::RDocTask.new do |rdoc|
     version = ""
   end
   rdoc.rdoc_dir = "rdoc"
-  rdoc.title = "mongoid #{version}"
+  rdoc.title = "humanoid #{version}"
   rdoc.rdoc_files.include("README*")
   rdoc.rdoc_files.include("lib/**/*.rb")
 end

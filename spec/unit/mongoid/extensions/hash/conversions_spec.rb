@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::Hash::Conversions do
+describe Humanoid::Extensions::Hash::Conversions do
 
   describe "#get" do
 

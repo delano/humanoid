@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::Hash::CriteriaHelpers do
+describe Humanoid::Extensions::Hash::CriteriaHelpers do
 
   describe "#expand_complex_criteria" do
 

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Commands::Delete do
+describe Humanoid::Commands::Delete do
 
   describe "#execute" do
 
@@ -11,7 +11,7 @@ describe Mongoid::Commands::Delete do
 
     it "removes the document from its collection" do
       @collection.expects(:remove).with({ :_id => @document.id })
-      Mongoid::Commands::Delete.execute(@document)
+      Humanoid::Commands::Delete.execute(@document)
     end
 
     context "when the document is embedded" do
@@ -24,7 +24,7 @@ describe Mongoid::Commands::Delete do
 
       it "removes the document from the parent attributes" do
         @parent.addresses.should == [@address]
-        Mongoid::Commands::Delete.execute(@address)
+        Humanoid::Commands::Delete.execute(@address)
         @parent.addresses.should be_empty
       end
 

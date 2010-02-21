@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Commands::Save do
+describe Humanoid::Commands::Save do
 
   describe "#execute" do
 
@@ -29,18 +29,18 @@ describe Mongoid::Commands::Save do
       it "runs the before and after callbacks" do
         @document.expects(:run_callbacks).with(:before_save)
         @document.expects(:run_callbacks).with(:after_save)
-        Mongoid::Commands::Save.execute(@document)
+        Humanoid::Commands::Save.execute(@document)
       end
 
       it "returns true" do
-        Mongoid::Commands::Save.execute(@document).should be_true
+        Humanoid::Commands::Save.execute(@document).should be_true
       end
 
       context "when the document has a parent" do
 
         it "executes a save on the parent" do
           @parent_collection.expects(:save).with(@parent.raw_attributes, :safe => true)
-          Mongoid::Commands::Save.execute(@document)
+          Humanoid::Commands::Save.execute(@document)
         end
 
       end
@@ -53,7 +53,7 @@ describe Mongoid::Commands::Save do
 
         it "calls save on the document collection" do
           @doc_collection.expects(:save).with(@document.raw_attributes, :safe => true)
-          Mongoid::Commands::Save.execute(@document)
+          Humanoid::Commands::Save.execute(@document)
         end
 
       end
@@ -67,7 +67,7 @@ describe Mongoid::Commands::Save do
       end
 
       it "returns false" do
-        Mongoid::Commands::Save.execute(@document).should be_false
+        Humanoid::Commands::Save.execute(@document).should be_false
       end
 
     end
@@ -79,7 +79,7 @@ describe Mongoid::Commands::Save do
       end
 
       it "ignores validation and returns true" do
-        Mongoid::Commands::Save.execute(@document, false).should be_true
+        Humanoid::Commands::Save.execute(@document, false).should be_true
       end
 
     end

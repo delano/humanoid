@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::Symbol::Inflections do
+describe Humanoid::Extensions::Symbol::Inflections do
 
   describe "#singular?" do
 

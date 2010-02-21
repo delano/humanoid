@@ -1,10 +1,10 @@
 require "spec_helper"
 
-describe Mongoid::Collections::Mimic do
+describe Humanoid::Collections::Mimic do
 
   let(:mimic) do
     klass = Class.new do
-      include Mongoid::Collections::Mimic
+      include Humanoid::Collections::Mimic
     end
     klass.new
   end
@@ -26,11 +26,11 @@ describe Mongoid::Collections::Mimic do
     context "when the call fails" do
 
       before do
-        Mongoid.reconnect_time = 0.10
+        Humanoid.reconnect_time = 0.10
       end
 
       after do
-        Mongoid.reconnect_time = 3
+        Humanoid.reconnect_time = 3
       end
 
       it "retries the call" do

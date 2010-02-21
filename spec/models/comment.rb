@@ -1,7 +1,7 @@
 class Comment
-  include Mongoid::Document
-  include Mongoid::Versioning
-  include Mongoid::Timestamps
+  include Humanoid::Document
+  include Humanoid::Versioning
+  include Humanoid::Timestamps
   field :text
   key :text
   validates_presence_of :text

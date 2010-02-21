@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Timestamps do
+describe Humanoid::Timestamps do
 
   describe ".included" do
 

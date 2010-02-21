@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Versioning do
+describe Humanoid::Versioning do
 
   describe "#version" do
 

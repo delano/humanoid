@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::Boolean::Conversions do
+describe Humanoid::Extensions::Boolean::Conversions do
 
   describe "#set" do
 

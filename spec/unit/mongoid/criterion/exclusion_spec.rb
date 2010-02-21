@@ -1,10 +1,10 @@
 require "spec_helper"
 
-describe Mongoid::Criterion::Exclusion do
+describe Humanoid::Criterion::Exclusion do
 
   before do
-    @criteria = Mongoid::Criteria.new(Person)
-    @canvas_criteria = Mongoid::Criteria.new(Canvas)
+    @criteria = Humanoid::Criteria.new(Person)
+    @canvas_criteria = Humanoid::Criteria.new(Canvas)
   end
 
   describe "#excludes" do

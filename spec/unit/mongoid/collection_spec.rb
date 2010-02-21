@@ -1,17 +1,17 @@
 require "spec_helper"
 
-describe Mongoid::Collection do
+describe Humanoid::Collection do
 
   let(:master) do
-    stub.quacks_like(Mongoid::Collections::Master.allocate)
+    stub.quacks_like(Humanoid::Collections::Master.allocate)
   end
 
   let(:slaves) do
-    stub.quacks_like(Mongoid::Collections::Slaves.allocate)
+    stub.quacks_like(Humanoid::Collections::Slaves.allocate)
   end
 
   let(:collection) do
-    Mongoid::Collection.new(Person, "people")
+    Humanoid::Collection.new(Person, "people")
   end
 
   before do
@@ -21,7 +21,7 @@ describe Mongoid::Collection do
 
   context "Mongo::Collection write operations" do
 
-    Mongoid::Collections::Operations::WRITE.each do |name|
+    Humanoid::Collections::Operations::WRITE.each do |name|
 
       it "defines #{name}" do
         collection.should respond_to(name)
@@ -32,7 +32,7 @@ describe Mongoid::Collection do
 
   context "Mongo::Collection read operations" do
 
-    Mongoid::Collections::Operations::READ.each do |name|
+    Humanoid::Collections::Operations::READ.each do |name|
 
       it "defines #{name}" do
         collection.should respond_to(name)
@@ -73,8 +73,8 @@ describe Mongoid::Collection do
   describe "#find" do
 
     before do
-      @cursor = stub.quacks_like(Mongoid::Cursor.allocate)
-      Mongoid::Cursor.expects(:new).with(Person, collection, @mongo_cursor).returns(@cursor)
+      @cursor = stub.quacks_like(Humanoid::Cursor.allocate)
+      Humanoid::Cursor.expects(:new).with(Person, collection, @mongo_cursor).returns(@cursor)
     end
 
     context "when no block supplied" do

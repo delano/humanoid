@@ -1,5 +1,5 @@
 class Pet
-  include Mongoid::Document
+  include Humanoid::Document
   field :name
   field :weight, :type => Float, :default => 0.0
   has_many :vet_visits

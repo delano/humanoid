@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Collections::Master do
+describe Humanoid::Collections::Master do
 
   let(:collection) do
     stub.quacks_like(Mongo::Collection.allocate)
@@ -11,7 +11,7 @@ describe Mongoid::Collections::Master do
   end
 
   let(:master) do
-    Mongoid::Collections::Master.new(db, "people")
+    Humanoid::Collections::Master.new(db, "people")
   end
 
   before do
@@ -20,7 +20,7 @@ describe Mongoid::Collections::Master do
 
   context "Mongo::Collection operations" do
 
-    Mongoid::Collections::Operations::ALL.each do |name|
+    Humanoid::Collections::Operations::ALL.each do |name|
 
       it "defines #{name}" do
         master.should respond_to(name)

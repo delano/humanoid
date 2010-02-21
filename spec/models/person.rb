@@ -1,6 +1,6 @@
 class Person
-  include Mongoid::Document
-  include Mongoid::Timestamps
+  include Humanoid::Document
+  include Humanoid::Timestamps
 
   field :title
   field :terms, :type => Boolean

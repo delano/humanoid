@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Mongoid::Matchers::Size do
+describe Humanoid::Matchers::Size do
 
-  let(:matcher) { Mongoid::Matchers::Size.new(["first", "second"]) }
+  let(:matcher) { Humanoid::Matchers::Size.new(["first", "second"]) }
 
   describe "#matches?" do
 

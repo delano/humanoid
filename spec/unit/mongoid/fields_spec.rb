@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Fields do
+describe Humanoid::Fields do
 
   describe ".defaults" do
 

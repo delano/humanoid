@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Contexts::Enumerable do
+describe Humanoid::Contexts::Enumerable do
 
   before do
     @london = Address.new(:number => 1, :street => "Bond Street")
@@ -8,10 +8,10 @@ describe Mongoid::Contexts::Enumerable do
     @melbourne = Address.new(:number => 20, :street => "Bourke Street")
     @new_york = Address.new(:number => 20, :street => "Broadway")
     @docs = [ @london, @shanghai, @melbourne, @new_york ]
-    @criteria = Mongoid::Criteria.new(Address)
+    @criteria = Humanoid::Criteria.new(Address)
     @criteria.documents = @docs
     @criteria.where(:street => "Bourke Street").only(:number)
-    @context = Mongoid::Contexts::Enumerable.new(@criteria)
+    @context = Humanoid::Contexts::Enumerable.new(@criteria)
   end
 
   describe "#aggregate" do
@@ -42,7 +42,7 @@ describe Mongoid::Contexts::Enumerable do
   describe "#execute" do
 
     before do
-      @criteria = Mongoid::Criteria.new(Address)
+      @criteria = Humanoid::Criteria.new(Address)
       @criteria.documents = @docs
     end
 
@@ -54,7 +54,7 @@ describe Mongoid::Contexts::Enumerable do
 
       before do
         @criteria.only(:number)
-        @context = Mongoid::Contexts::Enumerable.new(@criteria)
+        @context = Humanoid::Contexts::Enumerable.new(@criteria)
       end
 
       it "returns all the documents" do
@@ -66,7 +66,7 @@ describe Mongoid::Contexts::Enumerable do
 
       before do
         @criteria.skip(2).limit(2)
-        @context = Mongoid::Contexts::Enumerable.new(@criteria)
+        @context = Humanoid::Contexts::Enumerable.new(@criteria)
       end
 
       it "properly narrows down the matching results" do
@@ -78,7 +78,7 @@ describe Mongoid::Contexts::Enumerable do
 
       before do
         @criteria.limit(2)
-        @context = Mongoid::Contexts::Enumerable.new(@criteria)
+        @context = Humanoid::Contexts::Enumerable.new(@criteria)
       end
 
       it "properly narrows down the matching results" do
@@ -125,10 +125,10 @@ describe Mongoid::Contexts::Enumerable do
     let(:documents) { [stub] }
 
     before do
-      @criteria = Mongoid::Criteria.new(Address)
+      @criteria = Humanoid::Criteria.new(Address)
       @criteria.documents = documents
       @criteria.where(selector).skip(20)
-      @context = Mongoid::Contexts::Enumerable.new(@criteria)
+      @context = Humanoid::Contexts::Enumerable.new(@criteria)
     end
 
     it "sets the selector" do
@@ -182,9 +182,9 @@ describe Mongoid::Contexts::Enumerable do
     context "when the page option exists" do
 
       before do
-        @criteria = Mongoid::Criteria.new(Person).extras({ :page => 5 })
+        @criteria = Humanoid::Criteria.new(Person).extras({ :page => 5 })
         @criteria.documents = []
-        @context = Mongoid::Contexts::Enumerable.new(@criteria)
+        @context = Humanoid::Contexts::Enumerable.new(@criteria)
       end
 
       it "returns the page option" do
@@ -196,9 +196,9 @@ describe Mongoid::Contexts::Enumerable do
     context "when the page option does not exist" do
 
       before do
-        @criteria = Mongoid::Criteria.new(Person)
+        @criteria = Humanoid::Criteria.new(Person)
         @criteria.documents = []
-        @context = Mongoid::Contexts::Enumerable.new(@criteria)
+        @context = Humanoid::Contexts::Enumerable.new(@criteria)
       end
 
       it "returns 1" do
@@ -213,7 +213,7 @@ describe Mongoid::Contexts::Enumerable do
 
     before do
       @criteria = Person.criteria.skip(2).limit(2)
-      @context = Mongoid::Contexts::Enumerable.new(@criteria)
+      @context = Humanoid::Contexts::Enumerable.new(@criteria)
       @results = @context.paginate
     end
 
@@ -239,7 +239,7 @@ describe Mongoid::Contexts::Enumerable do
       before do
         @criteria = Person.criteria.limit(50)
         @criteria.documents = []
-        @context = Mongoid::Contexts::Enumerable.new(@criteria)
+        @context = Humanoid::Contexts::Enumerable.new(@criteria)
       end
 
       it "returns the limit" do
@@ -261,7 +261,7 @@ describe Mongoid::Contexts::Enumerable do
   context "#id_criteria" do
 
     let(:criteria) do
-      criteria = Mongoid::Criteria.new(Address)
+      criteria = Humanoid::Criteria.new(Address)
       criteria.documents = []
       criteria
     end

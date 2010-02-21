@@ -1,7 +1,7 @@
 class Post
-  include Mongoid::Document
-  include Mongoid::Versioning
-  include Mongoid::Timestamps
+  include Humanoid::Document
+  include Humanoid::Versioning
+  include Humanoid::Timestamps
   field :title
   belongs_to_related :person
 

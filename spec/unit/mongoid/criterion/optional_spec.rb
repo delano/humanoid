@@ -1,10 +1,10 @@
 require "spec_helper"
 
-describe Mongoid::Criterion::Optional do
+describe Humanoid::Criterion::Optional do
 
   before do
-    @criteria = Mongoid::Criteria.new(Person)
-    @canvas_criteria = Mongoid::Criteria.new(Canvas)
+    @criteria = Humanoid::Criteria.new(Person)
+    @canvas_criteria = Humanoid::Criteria.new(Canvas)
   end
 
   describe "#cache" do
@@ -190,7 +190,7 @@ describe Mongoid::Criterion::Optional do
     context "when the per_page option exists" do
 
       before do
-        @criteria = Mongoid::Criteria.new(Person).extras({ :per_page => 20, :page => 3 })
+        @criteria = Humanoid::Criteria.new(Person).extras({ :per_page => 20, :page => 3 })
       end
 
       it "returns the per_page option" do
@@ -202,7 +202,7 @@ describe Mongoid::Criterion::Optional do
     context "when the skip option exists" do
 
       before do
-        @criteria = Mongoid::Criteria.new(Person).extras({ :skip => 20 })
+        @criteria = Humanoid::Criteria.new(Person).extras({ :skip => 20 })
       end
 
       it "returns the skip option" do
@@ -214,7 +214,7 @@ describe Mongoid::Criterion::Optional do
     context "when an argument is provided" do
 
       before do
-        @criteria = Mongoid::Criteria.new(Person)
+        @criteria = Humanoid::Criteria.new(Person)
         @criteria.offset(40)
       end
 
@@ -229,7 +229,7 @@ describe Mongoid::Criterion::Optional do
       context "when page option exists" do
 
         before do
-          @criteria = Mongoid::Criteria.new(Person).extras({ :page => 2 })
+          @criteria = Humanoid::Criteria.new(Person).extras({ :page => 2 })
         end
 
         it "adds the skip option to the options and returns it" do
@@ -242,7 +242,7 @@ describe Mongoid::Criterion::Optional do
       context "when page option does not exist" do
 
         before do
-          @criteria = Mongoid::Criteria.new(Person)
+          @criteria = Humanoid::Criteria.new(Person)
         end
 
         it "returns nil" do
@@ -278,7 +278,7 @@ describe Mongoid::Criterion::Optional do
     context "when the page option exists" do
 
       before do
-        @criteria = Mongoid::Criteria.new(Person).extras({ :page => 5 })
+        @criteria = Humanoid::Criteria.new(Person).extras({ :page => 5 })
       end
 
       it "returns the page option" do
@@ -290,7 +290,7 @@ describe Mongoid::Criterion::Optional do
     context "when the page option does not exist" do
 
       before do
-        @criteria = Mongoid::Criteria.new(Person)
+        @criteria = Humanoid::Criteria.new(Person)
       end
 
       it "returns 1" do

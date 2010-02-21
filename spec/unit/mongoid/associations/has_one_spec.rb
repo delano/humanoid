@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Associations::HasOne do
+describe Humanoid::Associations::HasOne do
 
   before do
     @attributes = { "mixed_drink" => {
@@ -15,10 +15,10 @@ describe Mongoid::Associations::HasOne do
     context "when attributes provided" do
 
       before do
-        @association = Mongoid::Associations::HasOne.new(
+        @association = Humanoid::Associations::HasOne.new(
           @document,
           @attributes["mixed_drink"],
-          Mongoid::Associations::Options.new(:name => :mixed_drink)
+          Humanoid::Associations::Options.new(:name => :mixed_drink)
         )
       end
 
@@ -32,10 +32,10 @@ describe Mongoid::Associations::HasOne do
     context "when a type is supplied" do
 
       before do
-        @association = Mongoid::Associations::HasOne.new(
+        @association = Humanoid::Associations::HasOne.new(
           @document,
           @attributes["writer"],
-          Mongoid::Associations::Options.new(:name => :writer)
+          Humanoid::Associations::Options.new(:name => :writer)
         )
       end
 
@@ -74,8 +74,8 @@ describe Mongoid::Associations::HasOne do
           "Testing"
         end
       }
-      @options = Mongoid::Associations::Options.new(:name => :name, :extend => @block)
-      @association = Mongoid::Associations::HasOne.new(@parent, {}, @options)
+      @options = Humanoid::Associations::Options.new(:name => :name, :extend => @block)
+      @association = Humanoid::Associations::HasOne.new(@parent, {}, @options)
     end
 
     context "when the options have an extension" do
@@ -94,9 +94,9 @@ describe Mongoid::Associations::HasOne do
 
       before do
         @document = Person.new
-        @association = Mongoid::Associations::HasOne.instantiate(
+        @association = Humanoid::Associations::HasOne.instantiate(
           @document,
-          Mongoid::Associations::Options.new(:name => :name)
+          Humanoid::Associations::Options.new(:name => :name)
         )
       end
 
@@ -110,9 +110,9 @@ describe Mongoid::Associations::HasOne do
 
       before do
         @document = stub(:raw_attributes => { "name" => {} })
-        @association = Mongoid::Associations::HasOne.instantiate(
+        @association = Humanoid::Associations::HasOne.instantiate(
           @document,
-          Mongoid::Associations::Options.new(:name => :name)
+          Humanoid::Associations::Options.new(:name => :name)
         )
       end
 
@@ -126,12 +126,12 @@ describe Mongoid::Associations::HasOne do
 
       before do
         @document = stub(:raw_attributes => { "name" => { "first_name" => "Test" } })
-        @options = Mongoid::Associations::Options.new(:name => :name)
+        @options = Humanoid::Associations::Options.new(:name => :name)
       end
 
       it "delegates to new" do
-        Mongoid::Associations::HasOne.expects(:new).with(@document, { "first_name" => "Test" }, @options)
-        Mongoid::Associations::HasOne.instantiate(@document, @options)
+        Humanoid::Associations::HasOne.expects(:new).with(@document, { "first_name" => "Test" }, @options)
+        Humanoid::Associations::HasOne.instantiate(@document, @options)
       end
 
     end
@@ -141,10 +141,10 @@ describe Mongoid::Associations::HasOne do
   describe "#method_missing" do
 
     before do
-      @association = Mongoid::Associations::HasOne.new(
+      @association = Humanoid::Associations::HasOne.new(
         @document,
         @attributes["mixed_drink"],
-        Mongoid::Associations::Options.new(:name => :mixed_drink)
+        Humanoid::Associations::Options.new(:name => :mixed_drink)
       )
     end
 
@@ -172,10 +172,10 @@ describe Mongoid::Associations::HasOne do
     context "when attributes provided" do
 
       before do
-        @association = Mongoid::Associations::HasOne.new(
+        @association = Humanoid::Associations::HasOne.new(
           @document,
           @attributes["mixed_drink"],
-          Mongoid::Associations::Options.new(:name => :mixed_drink)
+          Humanoid::Associations::Options.new(:name => :mixed_drink)
         )
       end
 
@@ -191,7 +191,7 @@ describe Mongoid::Associations::HasOne do
   describe ".macro" do
 
     it "returns :has_one" do
-      Mongoid::Associations::HasOne.macro.should == :has_one
+      Humanoid::Associations::HasOne.macro.should == :has_one
     end
 
   end
@@ -203,10 +203,10 @@ describe Mongoid::Associations::HasOne do
       before do
         @name = Name.new(:first_name => "Donald")
         @person = Person.new(:title => "Sir")
-        @association = Mongoid::Associations::HasOne.update(
+        @association = Humanoid::Associations::HasOne.update(
           @name,
           @person,
-          Mongoid::Associations::Options.new(:name => :name)
+          Humanoid::Associations::Options.new(:name => :name)
         )
       end
 
@@ -230,10 +230,10 @@ describe Mongoid::Associations::HasOne do
       before do
         @name = Name.new(:first_name => "Donald")
         @person = Person.new(:title => "Sir")
-        Mongoid::Associations::HasOne.update(
+        Humanoid::Associations::HasOne.update(
           nil,
           @person,
-          Mongoid::Associations::Options.new(:name => :name)
+          Humanoid::Associations::Options.new(:name => :name)
         )
       end
 
@@ -248,10 +248,10 @@ describe Mongoid::Associations::HasOne do
   describe "#to_a" do
 
     before do
-      @association = Mongoid::Associations::HasOne.new(
+      @association = Humanoid::Associations::HasOne.new(
         @document,
         @attributes["mixed_drink"],
-        Mongoid::Associations::Options.new(:name => :mixed_drink)
+        Humanoid::Associations::Options.new(:name => :mixed_drink)
       )
     end
 
@@ -267,8 +267,8 @@ describe Mongoid::Associations::HasOne do
 
       before do
         @document = stub(:raw_attributes => { "name" => { "first_name" => "Test" } }, :update => true)
-        @options = Mongoid::Associations::Options.new(:name => :name)
-        @association = Mongoid::Associations::HasOne.instantiate(@document, @options)
+        @options = Humanoid::Associations::Options.new(:name => :name)
+        @association = Humanoid::Associations::HasOne.instantiate(@document, @options)
       end
 
       it "validates the document" do

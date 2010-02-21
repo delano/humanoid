@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Collections::CyclicIterator do
+describe Humanoid::Collections::CyclicIterator do
 
   before do
     @first = stub
@@ -16,7 +16,7 @@ describe Mongoid::Collections::CyclicIterator do
   describe "#initialize" do
 
     let(:iterator) do
-      Mongoid::Collections::CyclicIterator.new(array)
+      Humanoid::Collections::CyclicIterator.new(array)
     end
 
     it "defaults the counter to -1" do
@@ -29,7 +29,7 @@ describe Mongoid::Collections::CyclicIterator do
     context "when the iterator has just been created" do
 
       let(:iterator) do
-        Mongoid::Collections::CyclicIterator.new(array)
+        Humanoid::Collections::CyclicIterator.new(array)
       end
 
       it "returns the first element" do
@@ -40,7 +40,7 @@ describe Mongoid::Collections::CyclicIterator do
     context "when the iterator is in the middle" do
 
       let(:iterator) do
-        Mongoid::Collections::CyclicIterator.new(array)
+        Humanoid::Collections::CyclicIterator.new(array)
       end
 
       before do
@@ -55,7 +55,7 @@ describe Mongoid::Collections::CyclicIterator do
     context "when the iterator is on the last element" do
 
       let(:iterator) do
-        Mongoid::Collections::CyclicIterator.new(array)
+        Humanoid::Collections::CyclicIterator.new(array)
       end
 
       before do

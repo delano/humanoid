@@ -1,5 +1,5 @@
 class PetOwner
-  include Mongoid::Document
+  include Humanoid::Document
   field :title
   has_one :pet
   has_one :address

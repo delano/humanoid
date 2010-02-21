@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::Array::Accessors do
+describe Humanoid::Extensions::Array::Accessors do
 
   describe "#update" do
 

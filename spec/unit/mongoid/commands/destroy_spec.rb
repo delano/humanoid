@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Commands::Destroy do
+describe Humanoid::Commands::Destroy do
 
   describe "#execute" do
 
@@ -15,12 +15,12 @@ describe Mongoid::Commands::Destroy do
     it "runs the before and after destroy callbacks" do
       @document.expects(:run_callbacks).with(:before_destroy)
       @document.expects(:run_callbacks).with(:after_destroy)
-      Mongoid::Commands::Destroy.execute(@document)
+      Humanoid::Commands::Destroy.execute(@document)
     end
 
     it "removes the document from its collection" do
       @collection.expects(:remove).with({ :_id => @document.id })
-      Mongoid::Commands::Destroy.execute(@document)
+      Humanoid::Commands::Destroy.execute(@document)
     end
 
     context "when the document is embedded" do
@@ -33,7 +33,7 @@ describe Mongoid::Commands::Destroy do
 
       it "removes the document from the parent attributes" do
         @parent.addresses.should == [@address]
-        Mongoid::Commands::Destroy.execute(@address)
+        Humanoid::Commands::Destroy.execute(@address)
         @parent.addresses.should be_empty
       end
 

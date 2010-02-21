@@ -1,5 +1,5 @@
 class Address
-  include Mongoid::Document
+  include Humanoid::Document
   field :address_type
   field :number, :type => Integer
   field :street

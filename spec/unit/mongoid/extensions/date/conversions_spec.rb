@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::Date::Conversions do
+describe Humanoid::Extensions::Date::Conversions do
 
   before do
     @time = Date.today.to_time

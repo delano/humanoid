@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::Float::Conversions do
+describe Humanoid::Extensions::Float::Conversions do
 
   describe "#set" do
 

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::Hash::Accessors do
+describe Humanoid::Extensions::Hash::Accessors do
 
   before do
     @hash = {

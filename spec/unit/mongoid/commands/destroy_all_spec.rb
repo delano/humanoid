@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Commands::DestroyAll do
+describe Humanoid::Commands::DestroyAll do
 
   describe "#execute" do
 
@@ -14,8 +14,8 @@ describe Mongoid::Commands::DestroyAll do
 
     it "destroys each document that the criteria finds" do
       @klass.expects(:find).with(:all, @expected).returns(@docs)
-      Mongoid::Commands::Destroy.expects(:execute).with(@doc)
-      Mongoid::Commands::DestroyAll.execute(@klass, @conditions)
+      Humanoid::Commands::Destroy.expects(:execute).with(@doc)
+      Humanoid::Commands::DestroyAll.execute(@klass, @conditions)
     end
 
   end

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::Time::Conversions do
+describe Humanoid::Extensions::Time::Conversions do
 
   before do
     Time.zone = "Canberra"

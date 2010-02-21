@@ -1,5 +1,5 @@
 class Phone
-  include Mongoid::Document
+  include Humanoid::Document
   field :number
   key :number
   belongs_to :person, :inverse_of => :phone_numbers

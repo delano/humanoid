@@ -1,13 +1,13 @@
 require "spec_helper"
 
-describe Mongoid::Document do
+describe Humanoid::Document do
 
   before do
     @database = mock
     @collection = stub(:name => "people")
     @canvas_collection = stub(:name => "canvases")
-    Mongoid::Collection.stubs(:new).with(Person, "people").returns(@collection)
-    Mongoid::Collection.stubs(:new).with(Canvas, "canvases").returns(@canvas_collection)
+    Humanoid::Collection.stubs(:new).with(Person, "people").returns(@collection)
+    Humanoid::Collection.stubs(:new).with(Canvas, "canvases").returns(@canvas_collection)
     @collection.stubs(:create_index).with(:_type, false)
     @canvas_collection.stubs(:create_index).with(:_type, false)
   end
@@ -156,7 +156,7 @@ describe Mongoid::Document do
     before do
       @child = Name.new(:first_name => "Hank", :last_name => "Moody")
       @parent = Person.new(:title => "Mr.")
-      @options = Mongoid::Associations::Options.new(:name => :name)
+      @options = Humanoid::Associations::Options.new(:name => :name)
     end
 
     it "sets up all associations in the object graph" do
@@ -635,7 +635,7 @@ describe Mongoid::Document do
     context "on a parent class" do
 
       it "sets the collection name and collection for the document" do
-        Mongoid::Collection.expects(:new).with(Patient, "population").returns(@collection)
+        Humanoid::Collection.expects(:new).with(Patient, "population").returns(@collection)
         Patient.store_in :population
         Patient.collection_name.should == "population"
       end
@@ -645,12 +645,12 @@ describe Mongoid::Document do
     context "on a subclass" do
 
       after do
-        Mongoid::Collection.expects(:new).with(Firefox, "canvases")
+        Humanoid::Collection.expects(:new).with(Firefox, "canvases")
         Firefox.store_in :canvases
       end
 
       it "changes the collection name for the entire hierarchy" do
-        Mongoid::Collection.expects(:new).with(Firefox, "browsers").returns(@collection)
+        Humanoid::Collection.expects(:new).with(Firefox, "browsers").returns(@collection)
         Firefox.store_in :browsers
         Canvas.collection_name.should == "browsers"
       end

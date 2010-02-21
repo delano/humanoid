@@ -1,15 +1,15 @@
 require "spec_helper"
 
-describe Mongoid::Errors do
+describe Humanoid::Errors do
 
-  describe Mongoid::Errors::DocumentNotFound do
+  describe Humanoid::Errors::DocumentNotFound do
 
     describe "#message" do
 
       context "default" do
 
         before do
-          @error = Mongoid::Errors::DocumentNotFound.new(Person, "3")
+          @error = Humanoid::Errors::DocumentNotFound.new(Person, "3")
         end
 
         it "contains document not found" do
@@ -22,14 +22,14 @@ describe Mongoid::Errors do
 
   end
 
-  describe Mongoid::Errors::InvalidOptions do
+  describe Humanoid::Errors::InvalidOptions do
 
     describe "#message" do
 
       context "default" do
 
         before do
-          @error = Mongoid::Errors::InvalidOptions.new
+          @error = Humanoid::Errors::InvalidOptions.new
         end
 
         it "returns the class name" do
@@ -42,12 +42,12 @@ describe Mongoid::Errors do
 
   end
 
-  describe Mongoid::Errors::InvalidDatabase do
+  describe Humanoid::Errors::InvalidDatabase do
 
     describe "#message" do
 
       before do
-        @error = Mongoid::Errors::InvalidDatabase.new("Test")
+        @error = Humanoid::Errors::InvalidDatabase.new("Test")
       end
 
       it "returns a message with the bad db object class" do
@@ -58,7 +58,7 @@ describe Mongoid::Errors do
 
   end
 
-  describe Mongoid::Errors::Validations do
+  describe Humanoid::Errors::Validations do
 
     describe "#message" do
 
@@ -66,7 +66,7 @@ describe Mongoid::Errors do
 
         before do
           @errors = stub(:full_messages => "Testing")
-          @error = Mongoid::Errors::Validations.new(@errors)
+          @error = Humanoid::Errors::Validations.new(@errors)
         end
 
         it "contains the errors' full messages" do
@@ -79,7 +79,7 @@ describe Mongoid::Errors do
 
   end
 
-  describe Mongoid::Errors::InvalidCollection do
+  describe Humanoid::Errors::InvalidCollection do
 
     describe "#message" do
 
@@ -87,7 +87,7 @@ describe Mongoid::Errors do
 
         before do
           @klass = Address
-          @error = Mongoid::Errors::InvalidCollection.new(@klass)
+          @error = Humanoid::Errors::InvalidCollection.new(@klass)
         end
 
         it "contains class is not allowed" do

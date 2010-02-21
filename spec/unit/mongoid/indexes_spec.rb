@@ -1,12 +1,12 @@
 require "spec_helper"
 
-describe Mongoid::Indexes do
+describe Humanoid::Indexes do
 
   describe ".included" do
 
     before do
       @class = Class.new do
-        include Mongoid::Indexes
+        include Humanoid::Indexes
       end
     end
 
@@ -30,7 +30,7 @@ describe Mongoid::Indexes do
 
       before do
         @class = Class.new do
-          include Mongoid::Indexes
+          include Humanoid::Indexes
         end
       end
 
@@ -47,7 +47,7 @@ describe Mongoid::Indexes do
 
       before do
         @class = Class.new do
-          include Mongoid::Indexes
+          include Humanoid::Indexes
         end
         @class.indexed = true
       end
@@ -65,7 +65,7 @@ describe Mongoid::Indexes do
     before do
       @collection = mock
       @class = Class.new do
-        include Mongoid::Indexes
+        include Humanoid::Indexes
       end
       @class.expects(:collection).returns(@collection)
     end

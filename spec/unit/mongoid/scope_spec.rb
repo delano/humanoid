@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Scope do
+describe Humanoid::Scope do
 
   before do
     Person.delete_all
@@ -9,7 +9,7 @@ describe Mongoid::Scope do
   describe "#==" do
 
     before do
-      @scope = Mongoid::Scope.new(Person, {})
+      @scope = Humanoid::Scope.new(Person, {})
     end
 
     context "when other is a scope" do
@@ -17,7 +17,7 @@ describe Mongoid::Scope do
       context "when the parent and conditions match" do
 
         before do
-          @other = Mongoid::Scope.new(Person, {})
+          @other = Humanoid::Scope.new(Person, {})
         end
 
         it "returns true" do
@@ -29,7 +29,7 @@ describe Mongoid::Scope do
       context "when the conditions do not match" do
 
         before do
-          @other = Mongoid::Scope.new(Person, { :where => { :field => "value" } })
+          @other = Humanoid::Scope.new(Person, { :where => { :field => "value" } })
         end
 
         it "returns false" do
@@ -69,7 +69,7 @@ describe Mongoid::Scope do
     context "when other is an invalid type" do
 
       it "returns false" do
-        Mongoid::Scope.new(Person, {}).should_not == stub
+        Humanoid::Scope.new(Person, {}).should_not == stub
       end
 
     end
@@ -79,13 +79,13 @@ describe Mongoid::Scope do
   describe ".initialize" do
 
     before do
-      @parent = Mongoid::Scope.new(Person, {})
+      @parent = Humanoid::Scope.new(Person, {})
     end
 
     context "when parent is another scope" do
 
       before do
-        @scope = Mongoid::Scope.new(@parent, {})
+        @scope = Humanoid::Scope.new(@parent, {})
       end
 
       it "does not set the class" do
@@ -97,7 +97,7 @@ describe Mongoid::Scope do
     context "when parent is a class" do
 
       before do
-        @scope = Mongoid::Scope.new(Person, {})
+        @scope = Humanoid::Scope.new(Person, {})
       end
 
       it "returns the parent class" do
@@ -109,7 +109,7 @@ describe Mongoid::Scope do
     context "when a block is passed in" do
 
       before do
-        @scope = Mongoid::Scope.new(Person, {}) do
+        @scope = Humanoid::Scope.new(Person, {}) do
           def extended
             "extended"
           end
@@ -132,7 +132,7 @@ describe Mongoid::Scope do
         @defined = mock
         @class = mock
         @class.expects(:scopes).twice.returns({ :testing => @defined })
-        @scope = Mongoid::Scope.new(@class, {})
+        @scope = Humanoid::Scope.new(@class, {})
       end
 
       it "calls the matching scope" do
@@ -148,7 +148,7 @@ describe Mongoid::Scope do
 
         before do
           @target = mock
-          @scope = Mongoid::Scope.new(Person, {})
+          @scope = Humanoid::Scope.new(Person, {})
           @scope.instance_variable_set("@target", @target)
         end
 
@@ -165,9 +165,9 @@ describe Mongoid::Scope do
           @parent = mock
           @criteria = mock
           @parent.expects(:scopes).returns({})
-          @parent.expects(:is_a?).with(Mongoid::Scope).returns(true)
+          @parent.expects(:is_a?).with(Humanoid::Scope).returns(true)
           @parent.expects(:fuse)
-          @scope = Mongoid::Scope.new(@parent, {})
+          @scope = Humanoid::Scope.new(@parent, {})
         end
 
         it "creates a criteria from the parent scope" do
@@ -186,7 +186,7 @@ describe Mongoid::Scope do
     context "when parent is a class" do
 
       before do
-        @scope = Mongoid::Scope.new(Person, {})
+        @scope = Humanoid::Scope.new(Person, {})
       end
 
       it "delegates to the target" do
@@ -198,8 +198,8 @@ describe Mongoid::Scope do
     context "when parent is a scope" do
 
       before do
-        @parent = Mongoid::Scope.new(Person, {})
-        @scope = Mongoid::Scope.new(@parent, {})
+        @parent = Humanoid::Scope.new(Person, {})
+        @scope = Humanoid::Scope.new(@parent, {})
       end
 
       it "delegates to the parent" do
@@ -214,7 +214,7 @@ describe Mongoid::Scope do
 
     before do
       @parent = mock
-      @scope = Mongoid::Scope.new(@parent, {})
+      @scope = Humanoid::Scope.new(@parent, {})
     end
 
     it "delegates to the parent" do
@@ -227,7 +227,7 @@ describe Mongoid::Scope do
   describe "#target" do
 
     before do
-      @scope = Mongoid::Scope.new(Person, { :where => { :title => "Sir" } })
+      @scope = Humanoid::Scope.new(Person, { :where => { :title => "Sir" } })
     end
 
     it "returns the conditions criteria" do

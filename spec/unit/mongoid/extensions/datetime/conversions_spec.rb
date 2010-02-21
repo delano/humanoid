@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::DateTime::Conversions do
+describe Humanoid::Extensions::DateTime::Conversions do
 
   before do
     Time.zone = "Eastern Time (US & Canada)"

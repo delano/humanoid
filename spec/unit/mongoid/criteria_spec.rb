@@ -1,10 +1,10 @@
 require "spec_helper"
 
-describe Mongoid::Criteria do
+describe Humanoid::Criteria do
 
   before do
-    @criteria = Mongoid::Criteria.new(Person)
-    @canvas_criteria = Mongoid::Criteria.new(Canvas)
+    @criteria = Humanoid::Criteria.new(Person)
+    @canvas_criteria = Humanoid::Criteria.new(Canvas)
   end
 
   describe "#+" do
@@ -109,7 +109,7 @@ describe Mongoid::Criteria do
   describe "#aggregate" do
 
     before do
-      @context = stub.quacks_like(Mongoid::Contexts::Mongo.allocate)
+      @context = stub.quacks_like(Humanoid::Contexts::Mongo.allocate)
       @criteria.instance_variable_set(:@context, @context)
     end
 
@@ -123,7 +123,7 @@ describe Mongoid::Criteria do
   describe "#blank?" do
 
     before do
-      @context = stub.quacks_like(Mongoid::Contexts::Mongo.allocate)
+      @context = stub.quacks_like(Humanoid::Contexts::Mongo.allocate)
       @criteria.instance_variable_set(:@context, @context)
     end
 
@@ -172,7 +172,7 @@ describe Mongoid::Criteria do
       end
 
       it "creates a new context" do
-        Mongoid::Contexts::Mongo.expects(:new).with(@criteria).returns(@context)
+        Humanoid::Contexts::Mongo.expects(:new).with(@criteria).returns(@context)
         @criteria.context.should == @context
       end
 
@@ -181,11 +181,11 @@ describe Mongoid::Criteria do
     context "when the class is embedded" do
 
       before do
-        @criteria = Mongoid::Criteria.new(Address)
+        @criteria = Humanoid::Criteria.new(Address)
       end
 
       it "returns an enumerable context" do
-        @criteria.context.should be_a_kind_of(Mongoid::Contexts::Enumerable)
+        @criteria.context.should be_a_kind_of(Humanoid::Contexts::Enumerable)
       end
 
     end
@@ -193,7 +193,7 @@ describe Mongoid::Criteria do
     context "when the class is not embedded" do
 
       it "returns a mongo context" do
-        @criteria.context.should be_a_kind_of(Mongoid::Contexts::Mongo)
+        @criteria.context.should be_a_kind_of(Humanoid::Contexts::Mongo)
       end
 
     end
@@ -207,7 +207,7 @@ describe Mongoid::Criteria do
       before do
         @collection = mock
         Person.expects(:collection).returns(@collection)
-        @criteria = Mongoid::Criteria.new(Person).extras(:page => 1, :per_page => 20)
+        @criteria = Humanoid::Criteria.new(Person).extras(:page => 1, :per_page => 20)
         @collection.expects(:find).with(@criteria.selector, @criteria.options).returns([])
       end
 
@@ -224,7 +224,7 @@ describe Mongoid::Criteria do
       before do
         @collection = mock
         Person.expects(:collection).returns(@collection)
-        @criteria = Mongoid::Criteria.new(Person).extras(:page => 1, :per_page => 20)
+        @criteria = Humanoid::Criteria.new(Person).extras(:page => 1, :per_page => 20)
         @cursor = stub(:count => 44)
         @cursor.expects(:each)
         @collection.expects(:find).with(@criteria.selector, @criteria.options).returns(@cursor)
@@ -240,7 +240,7 @@ describe Mongoid::Criteria do
     context "when type is not :first" do
 
       it "calls find on the collection with the selector and options" do
-        criteria = Mongoid::Criteria.new(Person)
+        criteria = Humanoid::Criteria.new(Person)
         collection = mock
         Person.expects(:collection).returns(collection)
         collection.expects(:find).with(criteria.selector, criteria.options).returns([])
@@ -254,7 +254,7 @@ describe Mongoid::Criteria do
   describe "#count" do
 
     before do
-      @context = stub.quacks_like(Mongoid::Contexts::Mongo.allocate)
+      @context = stub.quacks_like(Humanoid::Contexts::Mongo.allocate)
       @criteria.instance_variable_set(:@context, @context)
     end
 
@@ -343,7 +343,7 @@ describe Mongoid::Criteria do
   describe "#first" do
 
     before do
-      @context = stub.quacks_like(Mongoid::Contexts::Mongo.allocate)
+      @context = stub.quacks_like(Humanoid::Contexts::Mongo.allocate)
       @criteria.instance_variable_set(:@context, @context)
     end
 
@@ -357,7 +357,7 @@ describe Mongoid::Criteria do
   describe "#group" do
 
     before do
-      @context = stub.quacks_like(Mongoid::Contexts::Mongo.allocate)
+      @context = stub.quacks_like(Humanoid::Contexts::Mongo.allocate)
       @criteria.instance_variable_set(:@context, @context)
     end
 
@@ -370,7 +370,7 @@ describe Mongoid::Criteria do
 
   describe "#initialize" do
 
-    let(:criteria) { Mongoid::Criteria.new(Person) }
+    let(:criteria) { Humanoid::Criteria.new(Person) }
 
     it "sets the selector to an empty hash" do
       criteria.selector.should == {}
@@ -392,7 +392,7 @@ describe Mongoid::Criteria do
   describe "#last" do
 
     before do
-      @context = stub.quacks_like(Mongoid::Contexts::Mongo.allocate)
+      @context = stub.quacks_like(Humanoid::Contexts::Mongo.allocate)
       @criteria.instance_variable_set(:@context, @context)
     end
 
@@ -406,7 +406,7 @@ describe Mongoid::Criteria do
   describe "#max" do
 
     before do
-      @context = stub.quacks_like(Mongoid::Contexts::Mongo.allocate)
+      @context = stub.quacks_like(Humanoid::Contexts::Mongo.allocate)
       @criteria.instance_variable_set(:@context, @context)
     end
 
@@ -428,7 +428,7 @@ describe Mongoid::Criteria do
       context "when the other has a selector and options" do
 
         before do
-          @other = Mongoid::Criteria.new(Person)
+          @other = Humanoid::Criteria.new(Person)
           @other.where(:name => "Chloe").order_by([[:name, :asc]])
           @selector = { :title => "Sir", :age => 30, :name => "Chloe" }
           @options = { :skip => 40, :limit => 20, :sort => [[:name, :asc]] }
@@ -445,7 +445,7 @@ describe Mongoid::Criteria do
       context "when the other has no selector or options" do
 
         before do
-          @other = Mongoid::Criteria.new(Person)
+          @other = Humanoid::Criteria.new(Person)
           @selector = { :title => "Sir", :age => 30 }
           @options = { :skip => 40, :limit => 20 }
         end
@@ -462,7 +462,7 @@ describe Mongoid::Criteria do
 
         before do
           @documents = [ stub ]
-          @other = Mongoid::Criteria.new(Person)
+          @other = Humanoid::Criteria.new(Person)
           @other.documents = @documents
         end
 
@@ -480,7 +480,7 @@ describe Mongoid::Criteria do
   describe "#method_missing" do
 
     before do
-      @criteria = Mongoid::Criteria.new(Person)
+      @criteria = Humanoid::Criteria.new(Person)
       @criteria.where(:title => "Sir")
     end
 
@@ -534,7 +534,7 @@ describe Mongoid::Criteria do
   describe "#min" do
 
     before do
-      @context = stub.quacks_like(Mongoid::Contexts::Mongo.allocate)
+      @context = stub.quacks_like(Humanoid::Contexts::Mongo.allocate)
       @criteria.instance_variable_set(:@context, @context)
     end
 
@@ -552,7 +552,7 @@ describe Mongoid::Criteria do
   describe "#one" do
 
     before do
-      @context = stub.quacks_like(Mongoid::Contexts::Mongo.allocate)
+      @context = stub.quacks_like(Humanoid::Contexts::Mongo.allocate)
       @criteria.instance_variable_set(:@context, @context)
     end
 
@@ -566,7 +566,7 @@ describe Mongoid::Criteria do
   describe "#page" do
 
     before do
-      @context = stub.quacks_like(Mongoid::Contexts::Mongo.allocate)
+      @context = stub.quacks_like(Humanoid::Contexts::Mongo.allocate)
       @criteria.instance_variable_set(:@context, @context)
     end
 
@@ -580,7 +580,7 @@ describe Mongoid::Criteria do
   describe "#paginate" do
 
     before do
-      @context = stub.quacks_like(Mongoid::Contexts::Mongo.allocate)
+      @context = stub.quacks_like(Humanoid::Contexts::Mongo.allocate)
       @criteria.instance_variable_set(:@context, @context)
     end
 
@@ -594,7 +594,7 @@ describe Mongoid::Criteria do
   describe "#per_page" do
 
     before do
-      @context = stub.quacks_like(Mongoid::Contexts::Mongo.allocate)
+      @context = stub.quacks_like(Humanoid::Contexts::Mongo.allocate)
       @criteria.instance_variable_set(:@context, @context)
     end
 
@@ -620,7 +620,7 @@ describe Mongoid::Criteria do
   describe "#sum" do
 
     before do
-      @context = stub.quacks_like(Mongoid::Contexts::Mongo.allocate)
+      @context = stub.quacks_like(Humanoid::Contexts::Mongo.allocate)
       @criteria.instance_variable_set(:@context, @context)
     end
 
@@ -641,12 +641,12 @@ describe Mongoid::Criteria do
           @id = Mongo::ObjectID.new.to_s
           @document = stub
           @criteria = mock
-          Mongoid::Criteria.expects(:new).returns(@criteria)
+          Humanoid::Criteria.expects(:new).returns(@criteria)
         end
 
         it "delegates to #id_criteria" do
           @criteria.expects(:id_criteria).with(@id).returns(@document)
-          Mongoid::Criteria.translate(Person, @id).should == @document
+          Humanoid::Criteria.translate(Person, @id).should == @document
         end
       end
 
@@ -656,12 +656,12 @@ describe Mongoid::Criteria do
           @id = Mongo::ObjectID.new
           @document = stub
           @criteria = mock
-          Mongoid::Criteria.expects(:new).returns(@criteria)
+          Humanoid::Criteria.expects(:new).returns(@criteria)
         end
 
         it "delegates to #id_criteria" do
           @criteria.expects(:id_criteria).with(@id).returns(@document)
-          Mongoid::Criteria.translate(Person, @id).should == @document
+          Humanoid::Criteria.translate(Person, @id).should == @document
         end
       end
     end
@@ -678,12 +678,12 @@ describe Mongoid::Criteria do
             @documents << stub
           end
           @criteria = mock
-          Mongoid::Criteria.expects(:new).returns(@criteria)
+          Humanoid::Criteria.expects(:new).returns(@criteria)
         end
 
         it "delegates to #id_criteria" do
           @criteria.expects(:id_criteria).with(@ids).returns(@documents)
-          Mongoid::Criteria.translate(Person, @ids).should == @documents
+          Humanoid::Criteria.translate(Person, @ids).should == @documents
         end
 
       end
@@ -691,7 +691,7 @@ describe Mongoid::Criteria do
       context "when Person, :conditions => {}" do
 
         before do
-          @criteria = Mongoid::Criteria.translate(Person, :conditions => { :title => "Test" })
+          @criteria = Humanoid::Criteria.translate(Person, :conditions => { :title => "Test" })
         end
 
         it "returns a criteria with a selector from the conditions" do
@@ -707,7 +707,7 @@ describe Mongoid::Criteria do
       context "when :all, :conditions => {}" do
 
         before do
-          @criteria = Mongoid::Criteria.translate(Person, :conditions => { :title => "Test" })
+          @criteria = Humanoid::Criteria.translate(Person, :conditions => { :title => "Test" })
         end
 
         it "returns a criteria with a selector from the conditions" do
@@ -723,7 +723,7 @@ describe Mongoid::Criteria do
       context "when :last, :conditions => {}" do
 
         before do
-          @criteria = Mongoid::Criteria.translate(Person, :conditions => { :title => "Test" })
+          @criteria = Humanoid::Criteria.translate(Person, :conditions => { :title => "Test" })
         end
 
         it "returns a criteria with a selector from the conditions" do
@@ -738,7 +738,7 @@ describe Mongoid::Criteria do
       context "when options are provided" do
 
         before do
-          @criteria = Mongoid::Criteria.translate(Person, :conditions => { :title => "Test" }, :skip => 10)
+          @criteria = Humanoid::Criteria.translate(Person, :conditions => { :title => "Test" }, :skip => 10)
         end
 
         it "adds the criteria and the options" do

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::Hash::Scoping do
+describe Humanoid::Extensions::Hash::Scoping do
 
   describe "#scoped" do
 

@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Mongoid::Matchers::Ne do
+describe Humanoid::Matchers::Ne do
 
-  let(:matcher) { Mongoid::Matchers::Ne.new("first") }
+  let(:matcher) { Humanoid::Matchers::Ne.new("first") }
 
   describe "#matches?" do
 

@@ -1,9 +1,9 @@
 require "spec_helper"
 
-describe Mongoid::NamedScope do
+describe Humanoid::NamedScope do
 
   class Player
-    include Mongoid::Document
+    include Humanoid::Document
     field :active, :type => Boolean
     field :frags, :type => Integer
     field :deaths, :type => Integer

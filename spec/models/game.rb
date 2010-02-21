@@ -1,5 +1,5 @@
 class Game
-  include Mongoid::Document
+  include Humanoid::Document
   field :high_score, :default => 500
   field :score, :type => Integer, :default => 0
   belongs_to_related :person

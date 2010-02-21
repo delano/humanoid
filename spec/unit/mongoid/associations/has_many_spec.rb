@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Associations::HasMany do
+describe Humanoid::Associations::HasMany do
 
   before do
     @attributes = { "addresses" => [
@@ -12,9 +12,9 @@ describe Mongoid::Associations::HasMany do
   describe "#[]" do
 
     before do
-      @association = Mongoid::Associations::HasMany.new(
+      @association = Humanoid::Associations::HasMany.new(
         @document,
-        Mongoid::Associations::Options.new(:name => :addresses)
+        Humanoid::Associations::Options.new(:name => :addresses)
       )
     end
 
@@ -40,9 +40,9 @@ describe Mongoid::Associations::HasMany do
   describe "#<<" do
 
     before do
-      @association = Mongoid::Associations::HasMany.new(
+      @association = Humanoid::Associations::HasMany.new(
         @document,
-        Mongoid::Associations::Options.new(:name => :addresses)
+        Humanoid::Associations::Options.new(:name => :addresses)
       )
       @address = Address.new
     end
@@ -80,9 +80,9 @@ describe Mongoid::Associations::HasMany do
     context "when a type is not provided" do
 
       before do
-        @association = Mongoid::Associations::HasMany.new(
+        @association = Humanoid::Associations::HasMany.new(
           @document,
-          Mongoid::Associations::Options.new(:name => :addresses)
+          Humanoid::Associations::Options.new(:name => :addresses)
         )
       end
 
@@ -104,9 +104,9 @@ describe Mongoid::Associations::HasMany do
     context "when a type is provided" do
 
       before do
-        @association = Mongoid::Associations::HasMany.new(
+        @association = Humanoid::Associations::HasMany.new(
           @document,
-          Mongoid::Associations::Options.new(:name => :shapes)
+          Humanoid::Associations::Options.new(:name => :shapes)
         )
       end
 
@@ -125,15 +125,15 @@ describe Mongoid::Associations::HasMany do
     context "when a type is not provided" do
 
       before do
-        @association = Mongoid::Associations::HasMany.new(
+        @association = Humanoid::Associations::HasMany.new(
           @document,
-          Mongoid::Associations::Options.new(:name => :addresses)
+          Humanoid::Associations::Options.new(:name => :addresses)
         )
         @address = Address.new(:street => "Yet Another")
       end
 
       it "builds and saves a new object" do
-        Mongoid::Commands::Save.expects(:execute).returns(true)
+        Humanoid::Commands::Save.expects(:execute).returns(true)
         address = @association.create({ :street => "Yet Another" })
         address.should be_a_kind_of(Address)
         address.street.should == "Yet Another"
@@ -144,14 +144,14 @@ describe Mongoid::Associations::HasMany do
     context "when a type is provided" do
 
       before do
-        @association = Mongoid::Associations::HasMany.new(
+        @association = Humanoid::Associations::HasMany.new(
           @document,
-          Mongoid::Associations::Options.new(:name => :shapes)
+          Humanoid::Associations::Options.new(:name => :shapes)
         )
       end
 
       it "instantiates a class of that type" do
-        Mongoid::Commands::Save.expects(:execute).returns(true)
+        Humanoid::Commands::Save.expects(:execute).returns(true)
         circle = @association.create({ :radius => 100 }, Circle)
         circle.should be_a_kind_of(Circle)
         circle.radius.should == 100
@@ -164,9 +164,9 @@ describe Mongoid::Associations::HasMany do
   describe "#concat" do
 
     before do
-      @association = Mongoid::Associations::HasMany.new(
+      @association = Humanoid::Associations::HasMany.new(
         @document,
-        Mongoid::Associations::Options.new(:name => :addresses)
+        Humanoid::Associations::Options.new(:name => :addresses)
       )
       @address = Address.new
     end
@@ -182,9 +182,9 @@ describe Mongoid::Associations::HasMany do
   describe "#clear" do
 
     before do
-      @association = Mongoid::Associations::HasMany.new(
+      @association = Humanoid::Associations::HasMany.new(
         @document,
-        Mongoid::Associations::Options.new(:name => :addresses)
+        Humanoid::Associations::Options.new(:name => :addresses)
       )
       @address = Address.new
       @association << @address
@@ -200,9 +200,9 @@ describe Mongoid::Associations::HasMany do
   describe "#find" do
 
     before do
-      @association = Mongoid::Associations::HasMany.new(
+      @association = Humanoid::Associations::HasMany.new(
         @document,
-        Mongoid::Associations::Options.new(:name => :addresses)
+        Humanoid::Associations::Options.new(:name => :addresses)
       )
     end
 
@@ -230,9 +230,9 @@ describe Mongoid::Associations::HasMany do
     context "when there are elements in the array" do
 
       before do
-        @association = Mongoid::Associations::HasMany.new(
+        @association = Humanoid::Associations::HasMany.new(
           @document,
-          Mongoid::Associations::Options.new(:name => :addresses)
+          Humanoid::Associations::Options.new(:name => :addresses)
         )
       end
 
@@ -246,9 +246,9 @@ describe Mongoid::Associations::HasMany do
     context "when the array is empty" do
 
       before do
-        @association = Mongoid::Associations::HasMany.new(
+        @association = Humanoid::Associations::HasMany.new(
           Person.new,
-          Mongoid::Associations::Options.new(:name => :addresses)
+          Humanoid::Associations::Options.new(:name => :addresses)
         )
       end
 
@@ -266,9 +266,9 @@ describe Mongoid::Associations::HasMany do
 
       before do
         @canvas = stub(:raw_attributes => { "shapes" => [{ "_type" => "Circle", "radius" => 5 }] }, :update => true)
-        @association = Mongoid::Associations::HasMany.new(
+        @association = Humanoid::Associations::HasMany.new(
           @canvas,
-          Mongoid::Associations::Options.new(:name => :shapes)
+          Humanoid::Associations::Options.new(:name => :shapes)
         )
       end
 
@@ -289,9 +289,9 @@ describe Mongoid::Associations::HasMany do
             "Testing"
           end
         end
-        @association = Mongoid::Associations::HasMany.new(
+        @association = Humanoid::Associations::HasMany.new(
           @person,
-          Mongoid::Associations::Options.new(:name => :addresses, :extend => @block)
+          Humanoid::Associations::Options.new(:name => :addresses, :extend => @block)
         )
       end
 
@@ -306,8 +306,8 @@ describe Mongoid::Associations::HasMany do
   describe ".instantiate" do
 
     it "delegates to new" do
-      Mongoid::Associations::HasMany.expects(:new).with(@document, @options)
-      Mongoid::Associations::HasMany.instantiate(@document, @options)
+      Humanoid::Associations::HasMany.expects(:new).with(@document, @options)
+      Humanoid::Associations::HasMany.instantiate(@document, @options)
     end
 
   end
@@ -317,9 +317,9 @@ describe Mongoid::Associations::HasMany do
     context "#length" do
 
       it "returns the length of the delegated array" do
-        @association = Mongoid::Associations::HasMany.new(
+        @association = Humanoid::Associations::HasMany.new(
           @document,
-          Mongoid::Associations::Options.new(:name => :addresses)
+          Humanoid::Associations::Options.new(:name => :addresses)
         )
         @association.length.should == 2
       end
@@ -331,7 +331,7 @@ describe Mongoid::Associations::HasMany do
   describe ".macro" do
 
     it "returns :has_many" do
-      Mongoid::Associations::HasMany.macro.should == :has_many
+      Humanoid::Associations::HasMany.macro.should == :has_many
     end
 
   end
@@ -339,9 +339,9 @@ describe Mongoid::Associations::HasMany do
   describe "#nested_build" do
 
     before do
-      @association = Mongoid::Associations::HasMany.new(
+      @association = Humanoid::Associations::HasMany.new(
         @document,
-        Mongoid::Associations::Options.new(:name => :addresses)
+        Humanoid::Associations::Options.new(:name => :addresses)
       )
     end
 
@@ -358,14 +358,14 @@ describe Mongoid::Associations::HasMany do
     context "when the association class has a criteria class method" do
 
       before do
-        @association = Mongoid::Associations::HasMany.new(
+        @association = Humanoid::Associations::HasMany.new(
           @document,
-          Mongoid::Associations::Options.new(:name => :addresses)
+          Humanoid::Associations::Options.new(:name => :addresses)
         )
       end
 
       it "returns the criteria" do
-        @association.california.should be_a_kind_of(Mongoid::Criteria)
+        @association.california.should be_a_kind_of(Humanoid::Criteria)
       end
 
       it "sets the documents on the criteria" do
@@ -385,9 +385,9 @@ describe Mongoid::Associations::HasMany do
     context "when no class method exists" do
 
       before do
-        @association = Mongoid::Associations::HasMany.new(
+        @association = Humanoid::Associations::HasMany.new(
           @document,
-          Mongoid::Associations::Options.new(:name => :addresses)
+          Humanoid::Associations::Options.new(:name => :addresses)
         )
       end
 
@@ -402,16 +402,16 @@ describe Mongoid::Associations::HasMany do
   describe "#paginate" do
 
     before do
-      @association = Mongoid::Associations::HasMany.new(
+      @association = Humanoid::Associations::HasMany.new(
         @document,
-        Mongoid::Associations::Options.new(:name => :addresses)
+        Humanoid::Associations::Options.new(:name => :addresses)
       )
       @options = { :page => 1, :per_page => 10 }
       @criteria = mock
     end
 
     it "creates a criteria and paginates it" do
-      Mongoid::Criteria.expects(:translate).with(Address, @options).returns(@criteria)
+      Humanoid::Criteria.expects(:translate).with(Address, @options).returns(@criteria)
       @criteria.expects(:documents=).with(@association.target)
       @criteria.expects(:paginate).returns([])
       @association.paginate(@options).should == []
@@ -421,9 +421,9 @@ describe Mongoid::Associations::HasMany do
   describe "#push" do
 
     before do
-      @association = Mongoid::Associations::HasMany.new(
+      @association = Humanoid::Associations::HasMany.new(
         @document,
-        Mongoid::Associations::Options.new(:name => :addresses)
+        Humanoid::Associations::Options.new(:name => :addresses)
       )
       @address = Address.new
     end
@@ -446,10 +446,10 @@ describe Mongoid::Associations::HasMany do
     before do
       @address = Address.new(:street => "Madison Ave")
       @person = Person.new(:title => "Sir")
-      @association = Mongoid::Associations::HasMany.update(
+      @association = Humanoid::Associations::HasMany.update(
         [@address],
         @person,
-        Mongoid::Associations::Options.new(:name => :addresses)
+        Humanoid::Associations::Options.new(:name => :addresses)
       )
     end
 

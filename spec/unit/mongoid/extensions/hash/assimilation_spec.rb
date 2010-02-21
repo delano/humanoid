@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::Hash::Assimilation do
+describe Humanoid::Extensions::Hash::Assimilation do
 
   describe "#assimilate" do
 
@@ -9,7 +9,7 @@ describe Mongoid::Extensions::Hash::Assimilation do
       before do
         @child = { :first_name => "Hank", :last_name => "Moody" }
         @parent = Person.new(:title => "Mr.")
-        @options = Mongoid::Associations::Options.new(:name => :name)
+        @options = Humanoid::Associations::Options.new(:name => :name)
       end
 
       it "incorporates the hash into the object graph" do
@@ -25,7 +25,7 @@ describe Mongoid::Extensions::Hash::Assimilation do
       before do
         @child = { :speed => 300 }
         @parent = Canvas.new(:name => "web page")
-        @options = Mongoid::Associations::Options.new(:name => :writer)
+        @options = Humanoid::Associations::Options.new(:name => :writer)
       end
 
       it "incorporates the hash into the object graph with the supplied type" do

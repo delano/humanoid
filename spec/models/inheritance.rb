@@ -1,5 +1,5 @@
 class Canvas
-  include Mongoid::Document
+  include Humanoid::Document
   field :name
   has_many :shapes
   has_one :writer
@@ -20,7 +20,7 @@ class Firefox < Browser
 end
 
 class Shape
-  include Mongoid::Document
+  include Humanoid::Document
   field :x, :type => Integer, :default => 0
   field :y, :type => Integer, :default => 0
 
@@ -39,7 +39,7 @@ class Circle < Shape
 end
 
 class Writer
-  include Mongoid::Document
+  include Humanoid::Document
   field :speed, :type => Integer, :default => 0
 
   belongs_to :canvas, :inverse_of => :writer

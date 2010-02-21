@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Collections::Master do
+describe Humanoid::Collections::Master do
 
   let(:collection) do
     stub.quacks_like(Mongo::Collection.allocate)
@@ -15,7 +15,7 @@ describe Mongoid::Collections::Master do
     context "when the slaves exist" do
 
       let(:slave) do
-        Mongoid::Collections::Slaves.new([ db ], "people")
+        Humanoid::Collections::Slaves.new([ db ], "people")
       end
 
       before do
@@ -30,7 +30,7 @@ describe Mongoid::Collections::Master do
     context "when the slaves do not exist" do
 
       let(:slave) do
-        Mongoid::Collections::Slaves.new([], "people")
+        Humanoid::Collections::Slaves.new([], "people")
       end
 
       it "returns true" do
@@ -41,7 +41,7 @@ describe Mongoid::Collections::Master do
     context "when the slaves are nil" do
 
       let(:slave) do
-        Mongoid::Collections::Slaves.new(nil, "people")
+        Humanoid::Collections::Slaves.new(nil, "people")
       end
 
       it "returns true" do
@@ -53,14 +53,14 @@ describe Mongoid::Collections::Master do
   context "Mongo::Collection operations" do
 
     let(:slave) do
-      Mongoid::Collections::Slaves.new([ db ], "people")
+      Humanoid::Collections::Slaves.new([ db ], "people")
     end
 
     before do
       db.expects(:collection).with("people").returns(collection)
     end
 
-    Mongoid::Collections::Operations::READ.each do |name|
+    Humanoid::Collections::Operations::READ.each do |name|
 
       it "defines #{name}" do
         slave.should respond_to(name)

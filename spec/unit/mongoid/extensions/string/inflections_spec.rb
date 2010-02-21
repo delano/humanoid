@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::String::Inflections do
+describe Humanoid::Extensions::String::Inflections do
 
   describe "#collectionize" do
 
@@ -35,11 +35,11 @@ describe Mongoid::Extensions::String::Inflections do
     context "when not parameterizing keys" do
 
       before do
-        Mongoid.parameterize_keys = false
+        Humanoid.parameterize_keys = false
       end
 
       after do
-        Mongoid.parameterize_keys = true
+        Humanoid.parameterize_keys = true
       end
 
       it "does nothing to the keys" do

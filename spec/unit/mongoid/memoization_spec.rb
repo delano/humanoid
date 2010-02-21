@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Memoization do
+describe Humanoid::Memoization do
 
   let(:memo) { "Memo" }
 

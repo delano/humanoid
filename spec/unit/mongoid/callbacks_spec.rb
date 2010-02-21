@@ -1,12 +1,12 @@
 require "spec_helper"
 
-describe Mongoid::Callbacks do
+describe Humanoid::Callbacks do
 
   describe ".included" do
 
     before do
       @class = Class.new do
-        include Mongoid::Callbacks
+        include Humanoid::Callbacks
       end
     end
 

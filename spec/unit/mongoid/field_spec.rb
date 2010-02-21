@@ -1,11 +1,11 @@
 require "spec_helper"
 
-describe Mongoid::Field do
+describe Humanoid::Field do
 
   describe "#default" do
 
     before do
-      @field = Mongoid::Field.new(:score, :default => 0)
+      @field = Humanoid::Field.new(:score, :default => 0)
     end
 
     it "returns the default option" do
@@ -17,7 +17,7 @@ describe Mongoid::Field do
   describe "#name" do
 
     before do
-      @field = Mongoid::Field.new(:score, :default => 0)
+      @field = Humanoid::Field.new(:score, :default => 0)
     end
 
     it "returns the name" do
@@ -29,7 +29,7 @@ describe Mongoid::Field do
   describe "#type" do
 
     before do
-      @field = Mongoid::Field.new(:name)
+      @field = Humanoid::Field.new(:name)
     end
 
     it "defaults to String" do
@@ -42,7 +42,7 @@ describe Mongoid::Field do
 
     before do
       @type = mock
-      @field = Mongoid::Field.new(:score, :default => 10, :type => @type)
+      @field = Humanoid::Field.new(:score, :default => 10, :type => @type)
     end
 
     context "nil is provided" do
@@ -68,7 +68,7 @@ describe Mongoid::Field do
 
     before do
       @type = mock
-      @field = Mongoid::Field.new(:score, :default => 10, :type => @type)
+      @field = Humanoid::Field.new(:score, :default => 10, :type => @type)
     end
 
     it "returns the value" do

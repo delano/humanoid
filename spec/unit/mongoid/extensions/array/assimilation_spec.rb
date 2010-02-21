@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::Array::Assimilation do
+describe Humanoid::Extensions::Array::Assimilation do
 
   describe "#assimilate" do
 
@@ -8,7 +8,7 @@ describe Mongoid::Extensions::Array::Assimilation do
       @address_one = { :street => "Circular Quay" }
       @address_two = Address.new(:street => "King St.")
       @parent = Person.new(:title => "Mr.")
-      @options = Mongoid::Associations::Options.new(:name => :addresses)
+      @options = Humanoid::Associations::Options.new(:name => :addresses)
       @child = [@address_one, @address_two]
     end
 

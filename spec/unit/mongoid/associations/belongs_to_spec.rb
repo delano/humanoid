@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Associations::BelongsTo do
+describe Humanoid::Associations::BelongsTo do
 
   let(:child) do
     Name.new(:first_name => "Drexel", :last_name => "Spivey")
@@ -11,17 +11,17 @@ describe Mongoid::Associations::BelongsTo do
   end
 
   let(:options) do
-    Mongoid::Associations::Options.new(:name => :person, :inverse_of => :name)
+    Humanoid::Associations::Options.new(:name => :person, :inverse_of => :name)
   end
 
   let(:has_many_options) do
-    Mongoid::Associations::Options.new(:name => :person, :inverse_of => :addresses)
+    Humanoid::Associations::Options.new(:name => :person, :inverse_of => :addresses)
   end
 
   describe "#find" do
 
     before do
-      @association = Mongoid::Associations::BelongsTo.new(target, options)
+      @association = Humanoid::Associations::BelongsTo.new(target, options)
     end
 
     context "when finding by id" do
@@ -37,7 +37,7 @@ describe Mongoid::Associations::BelongsTo do
   describe "#initialize" do
 
     before do
-      @association = Mongoid::Associations::BelongsTo.new(target, options)
+      @association = Humanoid::Associations::BelongsTo.new(target, options)
     end
 
     it "sets the target" do
@@ -61,8 +61,8 @@ describe Mongoid::Associations::BelongsTo do
           "Testing"
         end
       }
-      @options = Mongoid::Associations::Options.new(:name => :person, :extend => @block)
-      @association = Mongoid::Associations::BelongsTo.new(@parent, @options)
+      @options = Humanoid::Associations::Options.new(:name => :person, :extend => @block)
+      @association = Humanoid::Associations::BelongsTo.new(@parent, @options)
     end
 
     context "when the options have an extension" do
@@ -82,7 +82,7 @@ describe Mongoid::Associations::BelongsTo do
       before do
         @parent = stub
         @target = stub(:_parent => @parent)
-        @association = Mongoid::Associations::BelongsTo.instantiate(@target, options)
+        @association = Humanoid::Associations::BelongsTo.instantiate(@target, options)
       end
 
       it "sets the parent to the target" do
@@ -98,7 +98,7 @@ describe Mongoid::Associations::BelongsTo do
       end
 
       it "returns nil" do
-        Mongoid::Associations::BelongsTo.instantiate(@document, options).should be_nil
+        Humanoid::Associations::BelongsTo.instantiate(@document, options).should be_nil
       end
 
     end
@@ -108,7 +108,7 @@ describe Mongoid::Associations::BelongsTo do
   describe ".macro" do
 
     it "returns :belongs_to" do
-      Mongoid::Associations::BelongsTo.macro.should == :belongs_to
+      Humanoid::Associations::BelongsTo.macro.should == :belongs_to
     end
 
   end
@@ -116,7 +116,7 @@ describe Mongoid::Associations::BelongsTo do
   describe "#method_missing" do
 
     before do
-      @association = Mongoid::Associations::BelongsTo.new(target, options)
+      @association = Humanoid::Associations::BelongsTo.new(target, options)
     end
 
     context "when method is a getter" do
@@ -156,7 +156,7 @@ describe Mongoid::Associations::BelongsTo do
       before do
         @name = Name.new(:first_name => "Test", :last_name => "User")
         @person = Person.new(:title => "Mrs")
-        @association = Mongoid::Associations::BelongsTo.update(@person, @name, options)
+        @association = Humanoid::Associations::BelongsTo.update(@person, @name, options)
       end
 
       it "updates the parent document" do
@@ -179,7 +179,7 @@ describe Mongoid::Associations::BelongsTo do
       before do
         @address = Address.new(:street => "Broadway")
         @person = Person.new(:title => "Mrs")
-        Mongoid::Associations::BelongsTo.update(@person, @address, has_many_options)
+        Humanoid::Associations::BelongsTo.update(@person, @address, has_many_options)
       end
 
       it "updates the parent document" do

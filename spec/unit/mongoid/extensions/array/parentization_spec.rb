@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::Array::Parentization do
+describe Humanoid::Extensions::Array::Parentization do
 
   describe "#parentize" do
 

@@ -1,10 +1,10 @@
 require "spec_helper"
 
-describe Mongoid::Enslavement do
+describe Humanoid::Enslavement do
 
   before do
     @klass = Class.new do
-      include Mongoid::Enslavement
+      include Humanoid::Enslavement
     end
   end
 

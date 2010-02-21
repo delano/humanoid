@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Commands do
+describe Humanoid::Commands do
 
   before do
     @person = Person.new(:_id => Mongo::ObjectID.new.to_s)
@@ -9,7 +9,7 @@ describe Mongoid::Commands do
   describe "#delete" do
 
     it "delegates to the Delete command" do
-      Mongoid::Commands::Delete.expects(:execute).with(@person)
+      Humanoid::Commands::Delete.expects(:execute).with(@person)
       @person.delete
     end
 
@@ -18,7 +18,7 @@ describe Mongoid::Commands do
   describe "#destroy" do
 
     it "delegates to the Destroy command" do
-      Mongoid::Commands::Destroy.expects(:execute).with(@person)
+      Humanoid::Commands::Destroy.expects(:execute).with(@person)
       @person.destroy
     end
 
@@ -27,7 +27,7 @@ describe Mongoid::Commands do
   describe "#save" do
 
     it "delegates to the Save command" do
-      Mongoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
+      Humanoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
       @person.save
     end
 
@@ -40,13 +40,13 @@ describe Mongoid::Commands do
       context "when validation fails" do
 
         it "it raises an error" do
-          Mongoid::Commands::Save.expects(:execute).with(@person, true).returns(false)
+          Humanoid::Commands::Save.expects(:execute).with(@person, true).returns(false)
           @person.save.should be_false
         end
 
         it "should run callback before_create and no after_create" do
           @person.expects(:run_callbacks).with(:before_create)
-          Mongoid::Commands::Save.expects(:execute).with(@person, true).returns(false)
+          Humanoid::Commands::Save.expects(:execute).with(@person, true).returns(false)
           @person.expects(:run_callbacks).with(:after_create).never
           @person.save.should be_false
         end
@@ -54,13 +54,13 @@ describe Mongoid::Commands do
       end
 
       it "delegates to the save command" do
-        Mongoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
+        Humanoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
         @person.save
       end
 
       it "runs the before and after create callbacks" do
         @person.expects(:run_callbacks).with(:before_create)
-        Mongoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
+        Humanoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
         @person.expects(:run_callbacks).with(:after_create)
         @person.save
       end
@@ -74,7 +74,7 @@ describe Mongoid::Commands do
       end
 
       it "passes the validate param to the command" do
-        Mongoid::Commands::Save.expects(:execute).with(@person, false).returns(true)
+        Humanoid::Commands::Save.expects(:execute).with(@person, false).returns(true)
         @person.save(false)
       end
 
@@ -87,9 +87,9 @@ describe Mongoid::Commands do
       end
 
       it "returns false" do
-        Mongoid::Commands::Save.expects(:execute).raises(Mongo::OperationFailure.new("Operation Failed"))
+        Humanoid::Commands::Save.expects(:execute).raises(Mongo::OperationFailure.new("Operation Failed"))
         @person.save
-        @person.errors.on(:mongoid).should == "Operation Failed"
+        @person.errors.on(:humanoid).should == "Operation Failed"
       end
 
     end
@@ -101,7 +101,7 @@ describe Mongoid::Commands do
     context "when validation passes" do
 
       it "it returns the person" do
-        Mongoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
+        Humanoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
         @person.save!
       end
 
@@ -110,7 +110,7 @@ describe Mongoid::Commands do
     context "when validation fails" do
 
       it "it raises an error" do
-        Mongoid::Commands::Save.expects(:execute).with(@person, true).returns(false)
+        Humanoid::Commands::Save.expects(:execute).with(@person, true).returns(false)
         lambda { @person.save! }.should raise_error
       end
 
@@ -123,14 +123,14 @@ describe Mongoid::Commands do
       end
 
       it "delegates to the save command" do
-        Mongoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
+        Humanoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
         @person.save!
       end
 
       context "when validation fails" do
 
         it "it raises an error " do
-          Mongoid::Commands::Save.expects(:execute).with(@person, true).returns(false)
+          Humanoid::Commands::Save.expects(:execute).with(@person, true).returns(false)
           lambda { @person.save! }.should raise_error
         end
 
@@ -138,7 +138,7 @@ describe Mongoid::Commands do
 
       it "runs the before and after create callbacks" do
         @person.expects(:run_callbacks).with(:before_create)
-        Mongoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
+        Humanoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
         @person.expects(:run_callbacks).with(:after_create)
         @person.save!
       end
@@ -150,13 +150,13 @@ describe Mongoid::Commands do
   describe "#update_attributes" do
 
     it "delegates to the Save command" do
-      Mongoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
+      Humanoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
       @person.update_attributes({})
     end
 
     it "executes the before and after update callbacks" do
       @person.expects(:run_callbacks).with(:before_update)
-      Mongoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
+      Humanoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
       @person.expects(:run_callbacks).with(:after_update)
       @person.update_attributes({})
     end
@@ -168,7 +168,7 @@ describe Mongoid::Commands do
     context "when validation passes" do
 
       it "it returns the person" do
-        Mongoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
+        Humanoid::Commands::Save.expects(:execute).with(@person, true).returns(true)
         @person.update_attributes({}).should be_true
       end
 
@@ -177,7 +177,7 @@ describe Mongoid::Commands do
     context "when validation fails" do
 
       it "it raises an error" do
-        Mongoid::Commands::Save.expects(:execute).with(@person, true).returns(false)
+        Humanoid::Commands::Save.expects(:execute).with(@person, true).returns(false)
         lambda { @person.update_attributes!({}) }.should raise_error
       end
 
@@ -188,12 +188,12 @@ describe Mongoid::Commands do
   describe ".create" do
 
     it "delegates to the Create command" do
-      Mongoid::Commands::Create.expects(:execute)
+      Humanoid::Commands::Create.expects(:execute)
       Person.create
     end
 
     it "returns the document" do
-      Mongoid::Commands::Create.expects(:execute).returns(Person.new)
+      Humanoid::Commands::Create.expects(:execute).returns(Person.new)
       Person.create.should_not be_nil
     end
 
@@ -201,12 +201,12 @@ describe Mongoid::Commands do
 
       before do
         @person = Person.new
-        Mongoid::Commands::Save.expects(:execute).raises(Mongo::OperationFailure.new("Operation Failed"))
+        Humanoid::Commands::Save.expects(:execute).raises(Mongo::OperationFailure.new("Operation Failed"))
       end
 
       it "returns the document with errors" do
         person = Person.create
-        person.errors.on(:mongoid).should == "Operation Failed"
+        person.errors.on(:humanoid).should == "Operation Failed"
       end
 
       it "keeps the document's new record flag" do
@@ -221,12 +221,12 @@ describe Mongoid::Commands do
   describe ".create!" do
 
     it "delegates to the Create command" do
-      Mongoid::Commands::Create.expects(:execute).returns(Person.new)
+      Humanoid::Commands::Create.expects(:execute).returns(Person.new)
       Person.create!
     end
 
     it "returns the document" do
-      Mongoid::Commands::Create.expects(:execute).returns(Person.new)
+      Humanoid::Commands::Create.expects(:execute).returns(Person.new)
       Person.create!.should_not be_nil
     end
 
@@ -234,8 +234,8 @@ describe Mongoid::Commands do
 
       it "raises an error" do
         person = stub(:errors => stub(:empty? => false))
-        Mongoid::Commands::Create.expects(:execute).returns(person)
-        lambda { Person.create! }.should raise_error(Mongoid::Errors::Validations)
+        Humanoid::Commands::Create.expects(:execute).returns(person)
+        lambda { Person.create! }.should raise_error(Humanoid::Errors::Validations)
       end
 
     end
@@ -245,7 +245,7 @@ describe Mongoid::Commands do
   describe ".delete_all" do
 
     it "delegates to the DeleteAll command" do
-      Mongoid::Commands::DeleteAll.expects(:execute).with(Person, {})
+      Humanoid::Commands::DeleteAll.expects(:execute).with(Person, {})
       Person.delete_all
     end
 
@@ -254,7 +254,7 @@ describe Mongoid::Commands do
   describe ".destroy_all" do
 
     it "delegates to the DestroyAll command" do
-      Mongoid::Commands::DestroyAll.expects(:execute).with(Person, {})
+      Humanoid::Commands::DestroyAll.expects(:execute).with(Person, {})
       Person.destroy_all
     end
 

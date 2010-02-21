@@ -1,5 +1,5 @@
 class Name
-  include Mongoid::Document
+  include Humanoid::Document
   field :first_name
   field :last_name
   field :parent_title

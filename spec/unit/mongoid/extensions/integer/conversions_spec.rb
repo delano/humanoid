@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Mongoid::Extensions::Integer::Conversions do
+describe Humanoid::Extensions::Integer::Conversions do
 
   describe "#set" do
 

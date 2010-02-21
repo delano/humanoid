@@ -1,19 +1,19 @@
 = Overview
 
-== About Mongoid
+== About Humanoid
 
-Mongoid is an ODM (Object-Document-Mapper) framework for MongoDB in Ruby.
+A mirror of Mongoid (an awesome Ruby ODM framework for MongoDB) with a name I can say out loud. Everything other than the name is identical to the original releases.
 
 == Project Tracking
 
-* {Mongoid on Pivotal Tracker}[http://www.pivotaltracker.com/projects/27482]
-* {Mongoid Google Group}[http://groups.google.com/group/mongoid]
-* {Mongoid on CI Joe}[http://mongoid.org:4444/]
-* {Mongoid Website and Documentation}[http://mongoid.org]
+* {Humanoid on Pivotal Tracker}[http://www.pivotaltracker.com/projects/27482]
+* {Humanoid Google Group}[http://groups.google.com/group/humanoid]
+* {Humanoid on CI Joe}[http://mongoid.org:4444/]
+* {Humanoid Website and Documentation}[http://mongoid.org]
 
 == Compatibility
 
-Mongoid is developed against Ruby 1.8.6, 1.8.7, 1.9.1, 1.9.2
+Humanoid is developed against Ruby 1.8.6, 1.8.7, 1.9.1, 1.9.2
 
 Note API changes will be frequent until 1.0, releases will be
 frequent, and backwards compatibility will not be supported. Do not
@@ -24,7 +24,7 @@ release notes and documentation with each release.
 
 = Documentation
 
-Please see the new Mongoid website for up-to-date documentation:
+Please see the new Humanoid website for up-to-date documentation:
 {mongoid.org}[http://mongoid.org]
 
 = License

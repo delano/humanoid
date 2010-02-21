@@ -1,13 +1,13 @@
 require "spec_helper"
 
-describe Mongoid::Contexts::Mongo do
+describe Humanoid::Contexts::Mongo do
 
   describe "#aggregate" do
 
     before do
-      @criteria = Mongoid::Criteria.new(Person)
+      @criteria = Humanoid::Criteria.new(Person)
       @criteria.only(:field1)
-      @context = Mongoid::Contexts::Mongo.new(@criteria)
+      @context = Humanoid::Contexts::Mongo.new(@criteria)
     end
 
     context "when klass not provided" do
@@ -30,9 +30,9 @@ describe Mongoid::Contexts::Mongo do
   describe "#count" do
 
     before do
-      @criteria = Mongoid::Criteria.new(Person)
+      @criteria = Humanoid::Criteria.new(Person)
       @criteria.where(:test => 'Testing')
-      @context = Mongoid::Contexts::Mongo.new(@criteria)
+      @context = Humanoid::Contexts::Mongo.new(@criteria)
     end
 
     context "when criteria has not been executed" do
@@ -74,9 +74,9 @@ describe Mongoid::Contexts::Mongo do
       @cursor = stub(:count => 500)
       @collection = mock
       @klass = stub(:collection => @collection, :hereditary => false, :instantiate => @person)
-      @criteria = Mongoid::Criteria.new(@klass)
+      @criteria = Humanoid::Criteria.new(@klass)
       @criteria.where(selector).skip(20)
-      @context = Mongoid::Contexts::Mongo.new(@criteria)
+      @context = Humanoid::Contexts::Mongo.new(@criteria)
     end
 
     it "calls find on the collection" do
@@ -117,10 +117,10 @@ describe Mongoid::Contexts::Mongo do
   describe "#group" do
 
     before do
-      @criteria = Mongoid::Criteria.new(Person)
+      @criteria = Humanoid::Criteria.new(Person)
       @criteria.only(:field1)
       @grouping = [{ "title" => "Sir", "group" => [{ "title" => "Sir", "age" => 30, "_type" => "Person" }] }]
-      @context = Mongoid::Contexts::Mongo.new(@criteria)
+      @context = Humanoid::Contexts::Mongo.new(@criteria)
     end
 
     context "when klass provided" do
@@ -153,9 +153,9 @@ describe Mongoid::Contexts::Mongo do
     let(:klass) { Person }
 
     before do
-      @criteria = Mongoid::Criteria.new(klass)
+      @criteria = Humanoid::Criteria.new(klass)
       @criteria.where(selector).skip(20)
-      @context = Mongoid::Contexts::Mongo.new(@criteria)
+      @context = Humanoid::Contexts::Mongo.new(@criteria)
     end
 
     it "sets the selector" do
@@ -185,9 +185,9 @@ describe Mongoid::Contexts::Mongo do
     context "when documents exist" do
 
       before do
-        @criteria = Mongoid::Criteria.new(Person)
+        @criteria = Humanoid::Criteria.new(Person)
         @criteria.order_by([[:title, :asc]])
-        @context = Mongoid::Contexts::Mongo.new(@criteria)
+        @context = Humanoid::Contexts::Mongo.new(@criteria)
         @collection.expects(:find_one).with({:_type => {'$in' => ['Doctor', 'Person']}}, { :sort => [[:title, :desc]] }).returns(
           { "title" => "Sir", "_type" => "Person" }
         )
@@ -202,9 +202,9 @@ describe Mongoid::Contexts::Mongo do
     context "when no documents exist" do
 
       before do
-        @criteria = Mongoid::Criteria.new(Person)
+        @criteria = Humanoid::Criteria.new(Person)
         @criteria.order_by([[:_id, :asc]])
-        @context = Mongoid::Contexts::Mongo.new(@criteria)
+        @context = Humanoid::Contexts::Mongo.new(@criteria)
         @collection.expects(:find_one).with({:_type => {'$in' => ['Doctor', 'Person']}}, { :sort => [[:_id, :desc]] }).returns(nil)
       end
 
@@ -217,9 +217,9 @@ describe Mongoid::Contexts::Mongo do
     context "when no sorting options provided" do
 
       before do
-        @criteria = Mongoid::Criteria.new(Person)
+        @criteria = Humanoid::Criteria.new(Person)
         @criteria.order_by([[:_id, :asc]])
-        @context = Mongoid::Contexts::Mongo.new(@criteria)
+        @context = Humanoid::Contexts::Mongo.new(@criteria)
         @collection.expects(:find_one).with({:_type => {'$in' => ['Doctor', 'Person']}}, { :sort => [[:_id, :desc]] }).returns(
           { "title" => "Sir", "_type" => "Person" }
         )
@@ -236,11 +236,11 @@ describe Mongoid::Contexts::Mongo do
   describe "#max" do
 
     before do
-      @reduce = Mongoid::Contexts::Mongo::MAX_REDUCE.gsub("[field]", "age")
+      @reduce = Humanoid::Contexts::Mongo::MAX_REDUCE.gsub("[field]", "age")
       @collection = mock
       Person.expects(:collection).returns(@collection)
-      @criteria = Mongoid::Criteria.new(Person)
-      @context = Mongoid::Contexts::Mongo.new(@criteria)
+      @criteria = Humanoid::Criteria.new(Person)
+      @context = Humanoid::Contexts::Mongo.new(@criteria)
     end
 
     it "calls group on the collection with the aggregate js" do
@@ -259,11 +259,11 @@ describe Mongoid::Contexts::Mongo do
   describe "#min" do
 
     before do
-      @reduce = Mongoid::Contexts::Mongo::MIN_REDUCE.gsub("[field]", "age")
+      @reduce = Humanoid::Contexts::Mongo::MIN_REDUCE.gsub("[field]", "age")
       @collection = mock
       Person.expects(:collection).returns(@collection)
-      @criteria = Mongoid::Criteria.new(Person)
-      @context = Mongoid::Contexts::Mongo.new(@criteria)
+      @criteria = Humanoid::Criteria.new(Person)
+      @context = Humanoid::Contexts::Mongo.new(@criteria)
     end
 
     it "calls group on the collection with the aggregate js" do
@@ -285,8 +285,8 @@ describe Mongoid::Contexts::Mongo do
 
       before do
         Person.expects(:collection).returns(@collection)
-        @criteria = Mongoid::Criteria.new(Person)
-        @context = Mongoid::Contexts::Mongo.new(@criteria)
+        @criteria = Humanoid::Criteria.new(Person)
+        @context = Humanoid::Contexts::Mongo.new(@criteria)
         @collection.expects(:find_one).with({:_type => {'$in' => ['Doctor', 'Person']}}, {}).returns(
           { "title"=> "Sir", "_type" => "Person" }
         )
@@ -303,8 +303,8 @@ describe Mongoid::Contexts::Mongo do
       before do
         @collection = mock
         Person.expects(:collection).returns(@collection)
-        @criteria = Mongoid::Criteria.new(Person)
-        @context = Mongoid::Contexts::Mongo.new(@criteria)
+        @criteria = Humanoid::Criteria.new(Person)
+        @context = Humanoid::Contexts::Mongo.new(@criteria)
         @collection.expects(:find_one).with({:_type => {'$in' => ['Doctor', 'Person']}}, {}).returns(nil)
       end
 
@@ -321,8 +321,8 @@ describe Mongoid::Contexts::Mongo do
     context "when the page option exists" do
 
       before do
-        @criteria = Mongoid::Criteria.new(Person).extras({ :page => 5 })
-        @context = Mongoid::Contexts::Mongo.new(@criteria)
+        @criteria = Humanoid::Criteria.new(Person).extras({ :page => 5 })
+        @context = Humanoid::Contexts::Mongo.new(@criteria)
       end
 
       it "returns the page option" do
@@ -334,8 +334,8 @@ describe Mongoid::Contexts::Mongo do
     context "when the page option does not exist" do
 
       before do
-        @criteria = Mongoid::Criteria.new(Person)
-        @context = Mongoid::Contexts::Mongo.new(@criteria)
+        @criteria = Humanoid::Criteria.new(Person)
+        @context = Humanoid::Contexts::Mongo.new(@criteria)
       end
 
       it "returns 1" do
@@ -352,7 +352,7 @@ describe Mongoid::Contexts::Mongo do
       @collection = mock
       Person.expects(:collection).returns(@collection)
       @criteria = Person.where(:_id => "1").skip(60).limit(20)
-      @context = Mongoid::Contexts::Mongo.new(@criteria)
+      @context = Humanoid::Contexts::Mongo.new(@criteria)
       @collection.expects(:find).with(
         {:_type => { "$in" => ["Doctor", "Person"] }, :_id => "1"}, :skip => 60, :limit => 20
       ).returns([])
@@ -371,10 +371,10 @@ describe Mongoid::Contexts::Mongo do
     context "when klass not provided" do
 
       before do
-        @reduce = Mongoid::Contexts::Mongo::SUM_REDUCE.gsub("[field]", "age")
+        @reduce = Humanoid::Contexts::Mongo::SUM_REDUCE.gsub("[field]", "age")
         @collection = mock
-        @criteria = Mongoid::Criteria.new(Person)
-        @context = Mongoid::Contexts::Mongo.new(@criteria)
+        @criteria = Humanoid::Criteria.new(Person)
+        @context = Humanoid::Contexts::Mongo.new(@criteria)
         Person.expects(:collection).returns(@collection)
       end
 
@@ -395,7 +395,7 @@ describe Mongoid::Contexts::Mongo do
 
   context "#id_criteria" do
 
-    let(:criteria) { Mongoid::Criteria.new(Person) }
+    let(:criteria) { Humanoid::Criteria.new(Person) }
     let(:context) { criteria.context }
 
     context "with a single argument" do
